@@ -1,0 +1,22 @@
+<div class="homepage">
+
+
+	<tab ng-repeat="tab in homepageCtrl.tabs track by tab.id"
+		 tab-name="{{tab.name}}"
+		 id="{{tab.id}}"
+		 ng-model="homepageCtrl.selectedPage"
+		 ng-click="homepageCtrl.tabClicked(tab.id)"></tab>
+
+	<div ng-switch="homepageCtrl.selectedPage">
+		<my-page ng-switch-when="myPage"></my-page>
+		<games-predictions ng-switch-when="gamesPredictions"></games-predictions>
+		<top-predicts ng-switch-when="topPredicts"></top-predicts>
+	</div>
+
+	<!--<div class="homepage__startContainer">-->
+		<!--<a class="btn btn__start btn--ellipse"-->
+		   <!--ui-sref="createPlayers">-->
+			<!--New Game-->
+		<!--</a>-->
+	<!--</div>-->
+</div>

@@ -1,0 +1,67 @@
+html {
+	height: 100%;
+}
+
+body {
+	position: relative;
+	width: 800px;
+	height: 800px;
+
+	margin: 0;
+
+	font-family: 'roboto', arial, sans-serif;
+	text-rendering: geometricPrecision;
+
+	font-size: 14px;
+	line-height:  1.428571429;
+	color:  lighten(#000, 20%);
+	background-color: #ffffff;
+}
+
+a:hover, a:visited, a:link, a:active {
+	text-decoration: none;
+}
+
+a:focus {
+	outline: none;
+}
+
+a[tooltip], a[tooltip-html-unsafe],
+button[tooltip], button[tooltip-html-unsafe],
+[ng-click]:not([disabled]) [ng-click][tooltip]:not([disabled]), [ng-click][tooltip-html-unsafe]:not([disabled]) {
+	cursor: pointer;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+
+[tooltip],[tooltip-html-unsafe] {
+	cursor: help;
+}
+
+label {
+	//font-weight: normal;
+	display: inline-block;
+	max-width: 100%;
+}
+
+*, :after, :before  {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+input {
+	outline: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type=number] {
+	-moz-appearance:textfield;
+}
