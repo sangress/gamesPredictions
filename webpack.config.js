@@ -7,13 +7,17 @@ const webpack = require('webpack'),
 	path = require('path');
 const pkg = require('./package.json');
 
-//const libs = Object.keys(pkg.dependencies)
-//	.filter((dep) => dep !== 'bootstrap');
+const exclude = /node_modules|browser_modules/;
+
+const libs = Object.keys(pkg.dependencies)
+	.filter((dep) => dep !== 'bootstrap' && dep !== 'angular-ui-bootstrap')
+	.concat(Object.keys(pkg.browser));
 
 module.exports = {
 	context: path.resolve(__dirname, 'app'),
 	entry: {
-		main: './index.js'
+		main: './index.js',
+		libs: libs
 	},
 	output: {
 		path: path.join(__dirname, 'build'),
@@ -21,13 +25,13 @@ module.exports = {
 	},
 	module: {
 		preLoaders: [
-			{test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/ }
+			{test: /\.js$/, loader: "eslint-loader", exclude: exclude }
 		],
 		loaders: [
 			{
 				test: /\.js$/,
 				loader: "babel",
-				exclude: /node_modules/
+				exclude: exclude
 			},
 			{
 				test: /\.css$/,
@@ -44,7 +48,8 @@ module.exports = {
 			{
 				test: /\.html$/,
 				loader: "html"
-			}
+			},
+			{ test: /select\.min\.js$/, loader: "exports?angular.module('ui.select').name" }
 		]
 	},
 	resolve: {

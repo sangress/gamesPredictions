@@ -1,0 +1,760 @@
+/*
+Version: 3.5.2 Timestamp: Sat Nov  1 14:43:36 EDT 2014
+*/
+
+.selectListFilter {
+	height: 27px;
+}
+
+.selectListFilter__title {
+	position: absolute;
+	top: 2px;
+	left: 16px;
+	transition: top 0.03s ease, opacity 0.03s ease;
+	pointer-events: none;
+
+	color:  #87909e;
+	font-size: 12px;
+	font-weight: 300;
+	font-style: italic;
+	text-shadow: 0px 1px 1px #ffffff;
+}
+
+.selectListFilter-container {
+	margin: 0;
+	position: relative;
+	display: inline-block;
+	/* inline-block for ie7 */
+	zoom: 1;
+	*display: inline;
+	vertical-align: middle;
+}
+
+.selectListFilter-container,
+	//.selectListFilter-drop, removed
+.selectListFilter-search,
+.selectListFilter-search input {
+	/*
+		Force border-box so that % widths fit the parent
+		container without overlap because of margin/padding.
+		More Info : http://www.quirksmode.org/css/box.html
+	  */
+	-webkit-box-sizing: border-box; /* webkit */
+	-moz-box-sizing: border-box; /* firefox */
+	box-sizing: border-box; /* css3 */
+}
+
+// added
+.selectListFilter-drop {
+	margin-top: 0;
+	box-shadow: none;
+}
+
+.selectListFilter-container .selectListFilter-choice {
+	display: block;
+	height: 26px;
+	padding: 3px 17px;
+	//overflow: hidden;
+	position: relative;
+
+	border: none;
+	//white-space: nowrap;
+	//line-height: 26px; // removed
+	color: #c80000;
+	text-decoration: none;
+
+	border-radius: 4px;
+
+	background-clip: padding-box;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#eeeeee', GradientType = 0);
+
+	// added:
+	font-size: inherit;
+	line-height: inherit;
+	background: none;
+	cursor: pointer;
+	height: 100%;
+}
+
+html[dir="rtl"] .selectListFilter-container .selectListFilter-choice {
+	padding: 0 8px 0 0;
+}
+
+.selectListFilter-container.selectListFilter-drop-above .selectListFilter-choice {
+	border-bottom-color: #aaa;
+
+	border-radius: 0 0 4px 4px;
+
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.9, #fff));
+	background-image: -webkit-linear-gradient(center bottom, #eee 0%, #fff 90%);
+	background-image: -moz-linear-gradient(center bottom, #eee 0%, #fff 90%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
+	background-image: linear-gradient(to bottom, #eee 0%, #fff 90%);
+}
+
+.selectListFilter-container.selectListFilter-allowclear .selectListFilter-choice .selectListFilter-chosen {
+	margin-right: 42px;
+}
+
+.selectListFilter-container .selectListFilter-choice > .selectListFilter-chosen {
+	margin-right: 26px;
+	display: block;
+	overflow: hidden;
+
+	white-space: nowrap;
+
+	text-overflow: ellipsis;
+	float: none;
+	width: auto;
+
+	// added:
+	line-height: inherit;
+	height: 100%;
+}
+
+html[dir="rtl"] .selectListFilter-container .selectListFilter-choice > .selectListFilter-chosen {
+	margin-left: 26px;
+	margin-right: 0;
+}
+
+.selectListFilter-container .selectListFilter-choice abbr {
+	display: none;
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	right: 24px;
+	top: 8px;
+
+	font-size: 1px;
+	text-decoration: none;
+
+	border: 0;
+	//background: url('select2.png') right top no-repeat;
+	cursor: pointer;
+	outline: 0;
+}
+
+.selectListFilter-container.selectListFilter-allowclear .selectListFilter-choice abbr {
+	display: inline-block;
+}
+
+.selectListFilter-container .selectListFilter-choice abbr:hover {
+	background-position: right -11px;
+	cursor: pointer;
+}
+
+.selectListFilter-drop-mask {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	left: 0;
+	top: 0;
+	min-height: 100%;
+	min-width: 100%;
+	height: auto;
+	width: auto;
+	opacity: 0;
+	z-index: 9998;
+	/* styles required for IE to work */
+	background-color: #fff;
+	filter: alpha(opacity=0);
+}
+
+.selectListFilter-drop {
+	width: 100%;
+	margin-top: -1px;
+	position: absolute;
+	z-index: 9999;
+	top: 100%;
+
+	background: #fff;
+	color: #000;
+	border: 1px solid #aaa;
+	border-top: 0;
+
+	border-radius: 0 0 4px 4px;
+}
+
+.selectListFilter-drop.selectListFilter-drop-above {
+	margin-top: 1px;
+	border-top: 1px solid #aaa;
+	border-bottom: 0;
+
+	border-radius: 4px 4px 0 0;
+
+	-webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+	box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+}
+
+.selectListFilter-drop-active {
+	border-color: #d2d2d2;
+	border-top: none;
+
+	//added:
+	border-radius: 1px;
+}
+
+.selectListFilter-drop.selectListFilter-drop-above.selectListFilter-drop-active {
+	//border-top: 1px solid #5897fb;
+}
+
+.selectListFilter-drop-auto-width {
+	border-top: 1px solid #aaa;
+	width: auto;
+}
+
+.selectListFilter-drop-auto-width .selectListFilter-search {
+	padding-top: 4px;
+}
+
+.selectListFilter-container .selectListFilter-choice .selectListFilter-arrow {
+	display: inline-block;
+	position: absolute;
+	right: 0;
+	top: 0;
+
+	//border-radius: 0 4px 4px 0;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#eeeeee', endColorstr = '#cccccc', GradientType = 0);
+
+	// added:
+	width: 27px;
+	height: calc(~'100% - 6px');
+	margin: 3px 0;
+	padding: 2px 9px;
+	background: none;
+	border-left: 0;
+	border-right: 1px solid;
+	color: #c80000;
+	transform: rotate(180deg);
+
+	&::before {
+		content: "^"
+	}
+
+	b {
+		display: none;
+		background: none;
+	}
+
+}
+
+html[dir="rtl"] .selectListFilter-container .selectListFilter-choice .selectListFilter-arrow {
+	left: 0;
+	right: auto;
+
+	border-left: none;
+	border-right: 1px solid #aaa;
+	border-radius: 4px 0 0 4px;
+}
+
+.selectListFilter-container .selectListFilter-choice .selectListFilter-arrow b {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+html[dir="rtl"] .selectListFilter-container .selectListFilter-choice .selectListFilter-arrow b {
+	background-position: 2px 1px;
+}
+
+.selectListFilter-search {
+	display: inline-block;
+	width: 100%;
+	min-height: 26px;
+	margin: 0 0 4px 0;
+	padding: 7px 4px 1px;
+
+	position: relative;
+	z-index: 10000;
+
+	white-space: nowrap;
+
+	&::before {
+		display: block;
+		position: absolute;
+		top: 15px;
+		right: 9px;
+		font-size: 17px;
+		color: #62C7A2;
+	}
+}
+
+.selectListFilter-search input {
+	width: 100%;
+	height: inherit;
+	min-height: 26px;
+	padding: 0 20px 0 5px;
+	margin: 0;
+
+	outline: 0;
+	font-family: sans-serif;
+	font-size: inherit;
+
+	border: 1px solid #60c6a2;
+	border-radius: 0;
+
+	-webkit-box-shadow: none;
+	box-shadow: none;
+
+	//background: #fff url('select2.png') no-repeat 100% -22px;
+	//background: url('select2.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
+	//background: url('select2.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
+	//background: url('select2.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
+	//background: url('select2.png') no-repeat 100% -22px, linear-gradient(to bottom, #fff 85%, #eee 99%) 0 0;
+	background: none;
+}
+
+html[dir="rtl"] .selectListFilter-search input {
+	padding: 4px 5px 4px 20px;
+
+	//background: #fff url('select2.png') no-repeat -37px -22px;
+	//background: url('select2.png') no-repeat -37px -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
+	//background: url('select2.png') no-repeat -37px -22px, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
+	//background: url('select2.png') no-repeat -37px -22px, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
+	//background: url('select2.png') no-repeat -37px -22px, linear-gradient(to bottom, #fff 85%, #eee 99%) 0 0;
+}
+
+.selectListFilter-drop.selectListFilter-drop-above .selectListFilter-search input {
+	margin-top: 4px;
+}
+
+.selectListFilter-search input.selectListFilter-active {
+	//background: #fff url('select2-spinner.gif') no-repeat 100%;
+	//background: url('select2-spinner.gif') no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
+	//background: url('select2-spinner.gif') no-repeat 100%, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
+	//background: url('select2-spinner.gif') no-repeat 100%, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
+	//background: url('select2-spinner.gif') no-repeat 100%, linear-gradient(to bottom, #fff 85%, #eee 99%) 0 0;
+}
+
+.selectListFilter-container-active .selectListFilter-choice,
+.selectListFilter-container-active .selectListFilter-choices {
+	//border: 1px solid #5897fb;
+	outline: none;
+
+	//-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .3); // removed
+	//box-shadow: 0 0 5px rgba(0, 0, 0, .3); // removed
+
+	// added:
+	box-shadow: none;
+	z-index: 1050;
+}
+
+.selectListFilter-dropdown-open .selectListFilter-choice {
+	border: 1px solid #d2d2d2;
+
+	border-radius: 0;
+	background: #d2d2d2;
+	color: #c80000;
+}
+
+.selectListFilter-dropdown-open.selectListFilter-drop-above .selectListFilter-choice,
+.selectListFilter-dropdown-open.selectListFilter-drop-above .selectListFilter-choices {
+	//border: 1px solid #5897fb;
+	border-top-color: transparent;
+
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(0.5, #eee));
+	background-image: -webkit-linear-gradient(center top, #fff 0%, #eee 50%);
+	background-image: -moz-linear-gradient(center top, #fff 0%, #eee 50%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0);
+	background-image: linear-gradient(to bottom, #fff 0%, #eee 50%);
+}
+
+.selectListFilter-dropdown-open .selectListFilter-choice .selectListFilter-arrow {
+	background: transparent;
+	filter: none;
+	color: #c80000;
+}
+html[dir="rtl"] .selectListFilter-dropdown-open .selectListFilter-choice .selectListFilter-arrow {
+	border-right: none;
+}
+
+.selectListFilter-dropdown-open .selectListFilter-choice .selectListFilter-arrow b {
+	background-position: -18px 1px;
+}
+
+html[dir="rtl"] .selectListFilter-dropdown-open .selectListFilter-choice .selectListFilter-arrow b {
+	background-position: -16px 1px;
+}
+
+.selectListFilter-hidden-accessible {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+/* results */
+.selectListFilter-results {
+	max-height: 200px;
+	//padding: 0 0 0 4px; // removed
+	//margin: 4px 4px 4px 0; // removed
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+	// added:
+	padding: 0;
+	margin: 0;
+}
+
+html[dir="rtl"] .selectListFilter-results {
+	//padding: 0 4px 0 0; //--
+	margin: 4px 0 4px 4px;
+}
+
+.selectListFilter-result-single {
+	padding-left: 0;
+	color: #626a77;
+}
+.selectListFilter-results ul.selectListFilter-result-sub {
+	margin: 0;
+}
+
+.selectListFilter-results li {
+	list-style: none;
+	display: list-item;
+	background-image: none;
+}
+
+.selectListFilter-results li.selectListFilter-result-with-children > .selectListFilter-result-label {
+	font-weight: bold;
+}
+
+.selectListFilter-results .selectListFilter-result-label {
+	padding: 0 17px;
+	margin: 0;
+	cursor: pointer;
+
+	min-height: 1em;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.selectListFilter-results-dept-1 .selectListFilter-result-label { padding-left: 20px }
+.selectListFilter-results-dept-2 .selectListFilter-result-label { padding-left: 40px }
+.selectListFilter-results-dept-3 .selectListFilter-result-label { padding-left: 60px }
+.selectListFilter-results-dept-4 .selectListFilter-result-label { padding-left: 80px }
+.selectListFilter-results-dept-5 .selectListFilter-result-label { padding-left: 100px }
+.selectListFilter-results-dept-6 .selectListFilter-result-label { padding-left: 110px }
+.selectListFilter-results-dept-7 .selectListFilter-result-label { padding-left: 120px }
+
+.selectListFilter-results .selectListFilter-highlighted {
+	background: #c80000;
+	color: #fff;
+}
+
+.selectListFilter-results li em {
+	background: #feffde;
+	font-style: normal;
+}
+
+.selectListFilter-results .selectListFilter-highlighted em {
+	background: transparent;
+}
+
+.selectListFilter-results .selectListFilter-highlighted ul {
+	background: #fff;
+	color: #000;
+}
+
+.selectListFilter-results .selectListFilter-no-results,
+.selectListFilter-results .selectListFilter-searching,
+.selectListFilter-results .selectListFilter-ajax-error,
+.selectListFilter-results .selectListFilter-selection-limit {
+	background: #f4f4f4;
+	display: list-item;
+	padding-left: 5px;
+}
+
+/*
+disabled look for disabled choices in the results dropdown
+*/
+.selectListFilter-results .selectListFilter-disabled.selectListFilter-highlighted {
+	color: #666;
+	background: #f4f4f4;
+	display: list-item;
+	cursor: default;
+}
+.selectListFilter-results .selectListFilter-disabled {
+	background: #f4f4f4;
+	display: list-item;
+	cursor: default;
+}
+
+.selectListFilter-results .selectListFilter-selected {
+	display: none;
+}
+
+//.selectListFilter-more-results.selectListFilter-active {
+//	background: #f4f4f4 url('select2-spinner.gif') no-repeat 100%;
+//}
+
+.selectListFilter-results .selectListFilter-ajax-error {
+	background: rgba(255, 50, 50, .2);
+}
+
+.selectListFilter-more-results {
+	background: #f4f4f4;
+	display: list-item;
+}
+
+/* disabled styles */
+
+.selectListFilter-container.selectListFilter-container-disabled .selectListFilter-choice {
+	background: #e7ebed;
+	text-shadow: 0px 1px 1px #ffffff;
+	background-image: none;
+	border: 1px solid #8993a2;
+	cursor: default;
+}
+
+.selectListFilter-container.selectListFilter-container-disabled .selectListFilter-choice .selectListFilter-arrow {
+	background: #e7ebed;
+	background-image: none;
+	border-left: 0;
+}
+
+.selectListFilter-container.selectListFilter-container-disabled .selectListFilter-choice abbr {
+	display: none;
+}
+
+
+/* multiselect */
+
+.selectListFilter-container-multi .selectListFilter-choices {
+	height: auto !important;
+	height: 1%;
+	margin: 0;
+	padding: 0 5px 0 0;
+	position: relative;
+
+	border: 1px solid #aaa;
+	cursor: text;
+	overflow: hidden;
+
+	background-color: #fff;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eee), color-stop(15%, #fff));
+	background-image: -webkit-linear-gradient(top, #eee 1%, #fff 15%);
+	background-image: -moz-linear-gradient(top, #eee 1%, #fff 15%);
+	background-image: linear-gradient(to bottom, #eee 1%, #fff 15%);
+}
+
+html[dir="rtl"] .selectListFilter-container-multi .selectListFilter-choices {
+	padding: 0 0 0 5px;
+}
+
+.selectListFilter-locked {
+	padding: 3px 5px 3px 5px !important;
+}
+
+.selectListFilter-container-multi .selectListFilter-choices {
+	min-height: 26px;
+}
+
+.selectListFilter-container-multi.selectListFilter-container-active .selectListFilter-choices {
+	//border: 1px solid #5897fb;
+	outline: none;
+
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+	box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+}
+.selectListFilter-container-multi .selectListFilter-choices li {
+	float: left;
+	list-style: none;
+}
+html[dir="rtl"] .selectListFilter-container-multi .selectListFilter-choices li
+{
+	float: right;
+}
+.selectListFilter-container-multi .selectListFilter-choices .selectListFilter-search-field {
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+}
+
+.selectListFilter-container-multi .selectListFilter-choices .selectListFilter-search-field input {
+	padding: 5px;
+	margin: 1px 0;
+
+	font-family: sans-serif;
+	font-size: 100%;
+	color: #666;
+	outline: 0;
+	border: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	background: transparent !important;
+}
+
+.selectListFilter-container-multi .selectListFilter-choices .selectListFilter-search-field input.selectListFilter-active {
+	//background: #fff url('select2-spinner.gif') no-repeat 100% !important;
+}
+
+.selectListFilter-default {
+	color: #999 !important;
+}
+
+.selectListFilter-dropdown-open .selectListFilter-default {
+	color: #fff !important;
+}
+
+.selectListFilter-container-multi .selectListFilter-choices .selectListFilter-search-choice {
+	padding: 3px 5px 3px 18px;
+	margin: 3px 0 3px 5px;
+	position: relative;
+
+	line-height: 13px;
+	color: #333;
+	cursor: default;
+	border: 1px solid #aaaaaa;
+
+	border-radius: 3px;
+
+	-webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+	box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+
+	background-clip: padding-box;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	background-color: #e4e4e4;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
+	background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+	background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+	background-image: linear-gradient(to bottom, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+}
+html[dir="rtl"] .selectListFilter-container-multi .selectListFilter-choices .selectListFilter-search-choice
+{
+	margin: 3px 5px 3px 0;
+	padding: 3px 18px 3px 5px;
+}
+.selectListFilter-container-multi .selectListFilter-choices .selectListFilter-search-choice .selectListFilter-chosen {
+	cursor: default;
+}
+.selectListFilter-container-multi .selectListFilter-choices .selectListFilter-search-choice-focus {
+	background: #d4d4d4;
+}
+
+.selectListFilter-search-choice-close {
+	display: block;
+	width: 12px;
+	height: 13px;
+	position: absolute;
+	right: 3px;
+	top: 4px;
+
+	font-size: 1px;
+	outline: none;
+	//background: url('select2.png') right top no-repeat;
+}
+html[dir="rtl"] .selectListFilter-search-choice-close {
+	right: auto;
+	left: 3px;
+}
+
+.selectListFilter-container-multi .selectListFilter-search-choice-close {
+	left: 3px;
+}
+
+html[dir="rtl"] .selectListFilter-container-multi .selectListFilter-search-choice-close {
+	left: auto;
+	right: 2px;
+}
+
+.selectListFilter-container-multi .selectListFilter-choices .selectListFilter-search-choice .selectListFilter-search-choice-close:hover {
+	background-position: right -11px;
+}
+.selectListFilter-container-multi .selectListFilter-choices .selectListFilter-search-choice-focus .selectListFilter-search-choice-close {
+	background-position: right -11px;
+}
+
+/* disabled styles */
+.selectListFilter-container-multi.selectListFilter-container-disabled .selectListFilter-choices {
+	background: #e7ebed;
+	background-image: none;
+	border: 1px solid #8993a2;
+	cursor: default;
+}
+
+.selectListFilter-container-multi.selectListFilter-container-disabled .selectListFilter-choices .selectListFilter-search-choice {
+	border: 1px solid #8993a2;
+	background-image: none;
+	background: #e7ebed;
+}
+
+.selectListFilter-container-multi.selectListFilter-container-disabled .selectListFilter-choices .selectListFilter-search-choice .selectListFilter-search-choice-close {    display: none;
+	background: none;
+}
+/* end multiselect */
+
+
+.selectListFilter-result-selectable .selectListFilter-match,
+.selectListFilter-result-unselectable .selectListFilter-match {
+	text-decoration: underline;
+}
+
+.selectListFilter-offscreen, .selectListFilter-offscreen:focus {
+	clip: rect(0 0 0 0) !important;
+	width: 1px !important;
+	height: 1px !important;
+	border: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow: hidden !important;
+	position: absolute !important;
+	outline: 0 !important;
+	left: 0px !important;
+	top: 0px !important;
+}
+
+.selectListFilter-display-none {
+	display: none;
+}
+
+.selectListFilter-measure-scrollbar {
+	position: absolute;
+	top: -10000px;
+	left: -10000px;
+	width: 100px;
+	height: 100px;
+	overflow: scroll;
+}
+
+/* Retina-ize icons */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 2dppx)  {
+	.selectListFilter-search input,
+	.selectListFilter-search-choice-close,
+	.selectListFilter-container .selectListFilter-choice abbr,
+	.selectListFilter-container .selectListFilter-choice .selectListFilter-arrow b {
+		//background-image: url('select2x2.png') !important;
+		background-repeat: no-repeat !important;
+		background-size: 60px 40px !important;
+	}
+
+	.selectListFilter-search input {
+		background-position: 100% -21px !important;
+	}
+}

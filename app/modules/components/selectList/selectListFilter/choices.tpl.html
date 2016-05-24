@@ -1,0 +1,11 @@
+<ul class="ui-select-choices ui-select-choices-content selectListFilter-results">
+    <li class="ui-select-choices-group" ng-class="{'selectListFilter-result-with-children': $select.choiceGrouped($group) }">
+        <div ng-show="$select.choiceGrouped($group)" class="ui-select-choices-group-label selectListFilter-result-label" ng-bind="$group.name"></div>
+        <ul role="listbox"
+            id="ui-select-choices-{{ $select.generatedId }}" ng-class="{'selectListFilter-result-sub': $select.choiceGrouped($group), 'selectListFilter-result-single': !$select.choiceGrouped($group) }">
+            <li role="option" id="ui-select-choices-row-{{ $select.generatedId }}-{{$index}}" class="ui-select-choices-row" ng-class="{'selectListFilter-highlighted': $select.isActive(this), 'selectListFilter-disabled': $select.isDisabled(this)}">
+                <div class="selectListFilter-result-label ui-select-choices-row-inner"></div>
+            </li>
+        </ul>
+    </li>
+</ul>

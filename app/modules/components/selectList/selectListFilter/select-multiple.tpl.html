@@ -1,0 +1,32 @@
+<div class="ui-select-container ui-select-multiple selectListFilter selectListFilter-container selectListFilter-container-multi"
+	 ng-class="{'selectListFilter-container-active selectListFilter-dropdown-open open': $select.open,
+                'selectListFilter-container-disabled': $select.disabled}">
+	<ul class="selectListFilter-choices">
+		<span class="ui-select-match"></span>
+		<li class="selectListFilter-search-field">
+			<input
+					type="text"
+					autocomplete="false"
+					autocorrect="off"
+					autocapitalize="off"
+					spellcheck="false"
+					role="combobox"
+					aria-expanded="true"
+					aria-owns="ui-select-choices-{{ $select.generatedId }}"
+					aria-label="{{ $select.baseTitle }}"
+					aria-activedescendant="ui-select-choices-row-{{ $select.generatedId }}-{{ $select.activeIndex }}"
+					class="selectListFilter-input ui-select-search"
+					placeholder="{{$selectMultiple.getPlaceholder()}}"
+					ng-disabled="$select.disabled"
+					ng-hide="$select.disabled"
+					ng-model="$select.search"
+					ng-click="$select.activate()"
+					style="width: 34px;"
+					ondrop="return false;">
+		</li>
+	</ul>
+	<div class="ui-select-dropdown selectListFilter-drop selectListFilter-with-searchbox selectListFilter-drop-active"
+		 ng-class="{'selectListFilter-display-none': !$select.open}">
+		<div class="ui-select-choices"></div>
+	</div>
+</div>
