@@ -7,8 +7,10 @@ const appModule = angular.module('homepage', []);
 HomepageController.$inject = [];
 function HomepageController() {
 
-	this.selectedPage = "myPage";
+	this.selectedPage = "gamesPredictions";
 	this.tabClicked = (id) => this.selectedPage = id;
+
+
 
 	this.tabs = [
 		{id: 'myPage', name: 'My Page'},

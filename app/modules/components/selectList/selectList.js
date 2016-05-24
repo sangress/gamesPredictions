@@ -10,11 +10,8 @@ const swModule = angular.module('selectList', []);
 SelectListController.$inject = [];
 function SelectListController() {
 	this.placeholder = 'Select';
-	this.options = [{id: null, value: "Select"}, {id: 1, value: "one"}, {id: 2, value: "two"}, {id: 3, value: "tree"}];
 
 	this.onSelect = ($item, $model) => {
-		
-		console.log($model);
 		this.ngModel.$setViewValue($model);
 		this.model = $model;
 	};
@@ -34,7 +31,7 @@ function SelectListController() {
 swModule.component('selectList', {
 	template: require('./selectListFilter/selectListFilter.html'),
 	bindings: {
-
+		options: "="
 	},
 	require: {ngModel: 'ngModel'},
 	controllerAs: 'selectListCtrl',
