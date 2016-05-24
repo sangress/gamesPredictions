@@ -11,9 +11,11 @@ function HomepageController() {
 	this.tabClicked = (id) => this.selectedPage = id;
 
 	this.tabs = [
-		{id: 'myPage', name: 'my page'},
-		{id: 'gamesPredictions', name: 'games predictions'},
-		{id: 'topPredicts', name: 'top predicts'}
+		{id: 'myPage', name: 'My Page'},
+		{id: 'qulificationPrediction', name: 'Qulification Prediction'},
+		{id: 'gamesPredictions', name: 'Games Predictions'},
+		{id: 'leaderBoard', name: 'LeaderBoard'},
+		{id: 'usersPredicts', name: 'Users Predicts'}
 	];
 }
 
