@@ -1,4 +1,62 @@
 <div class="gamesPredictions">
-	<game-prediction game="gamesPredictionsCtrl.game"></game-prediction>
-	<game-prediction game="gamesPredictionsCtrl.game"></game-prediction>
+
+	<div class="gamesPredictions__row gamesPredictions__header">
+		<span class="gamesPredictions__column">Team 1</span>
+		<span class="gamesPredictions__column">Team 2</span>
+		<span class="gamesPredictions__column">Time</span>
+		<span class="gamesPredictions__column">Winner</span>
+		<span class="gamesPredictions__column">Team 1 Goals</span>
+		<span class="gamesPredictions__column">Team 2 Goals</span>
+		<span class="gamesPredictions__column">Goal Difference</span>
+		<span class="gamesPredictions__column">First To Score</span>
+		<span class="gamesPredictions__column gamesPredictions__action"></span>
+		<!--<span class="gamesPredictions__column">Total</span>-->
+	</div>
+
+	<div class="gamesPredictions__row"
+		 ng-repeat="game in ::gamesPredictionsCtrl.games track by game.id">
+
+		<div class="gamesPredictions__column">{{game.teamOne}}</div>
+
+		<div class="gamesPredictions__column">{{game.teamTwo}}</div>
+
+		<div class="gamesPredictions__column">{{game.time}}</div>
+
+		<div class="gamesPredictions__column">
+			<div class="gamesPredictions__select">
+				<select-list ng-model="game.winnersModel"
+							 options="game.winnersOptions"></select-list>
+			</div>
+		</div>
+		<div class="gamesPredictions__column">
+			<div class="gamesPredictions__select">
+				<select-list ng-model="game.teamOneGoalsModel"
+							 options="gamesPredictionsCtrl.teamOneGoalsOptions"></select-list>
+			</div>
+		</div>
+		<div class="gamesPredictions__column">
+			<div class="gamesPredictions__select">
+				<select-list ng-model="game.teamTwoGoalsModel"
+							 options="gamesPredictionsCtrl.teamTwoGoalsOptions"></select-list>
+			</div>
+		</div>
+		<div class="gamesPredictions__column">
+			<div class="gamesPredictions__select">
+				<select-list ng-model="game.goalDifferenceModel"
+							 options="gamesPredictionsCtrl.goalDifferenceOptions"></select-list>
+			</div>
+		</div>
+		<div class="gamesPredictions__column">
+			<div class="gamesPredictions__select">
+				<select-list ng-model="game.firstToScoreModel"
+							 options="game.firstToScoreOptions"></select-list>
+			</div>
+		</div>
+
+		<div class="gamesPredictions__column gamesPredictions__action">V</div>
+		<!--<select-list ng-model="game.totalModel"-->
+		<!--class="gamesPredictions__column"-->
+		<!--options="game.totalOptions"></select-list>-->
+	</div>
+
 </div>

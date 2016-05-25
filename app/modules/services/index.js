@@ -1,5 +1,7 @@
 "use strict";
 
 module.exports = angular.module('services', [
-	require('./gameService')
+	require('./usersService'),
+	require('./countriesService'),
+	require('./gamesService')
 ]);

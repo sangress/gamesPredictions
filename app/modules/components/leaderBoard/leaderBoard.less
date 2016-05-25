@@ -1,3 +1,47 @@
 .leaderBoard {
 
+	&__table {
+		display: table;
+		width: 750px;
+	}
+
+	&__row {
+		display: table-row;
+	}
+
+	&__column {
+		display: table-cell;
+		width: 150px;
+		padding: 10px 0;
+
+		> div {
+			width: 200px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			padding-right: 5px;
+		}
+
+		&:first-child {
+			padding-left: 10px;
+		}
+
+		&:last-child {
+			padding-left: 20px;
+		}
+	}
+
+	&__header {
+		font-size: 16px;
+		font-weight: 600;
+
+		.leaderBoard__column {
+			border-bottom: 1px solid #c80000;
+		}
+	}
+
+	&__link {
+		color: #c80000;
+		cursor: pointer;
+	}
 }

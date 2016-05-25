@@ -1,3 +1,23 @@
 <div class="leaderBoard">
-	leaderBoard
+
+	<div class="leaderBoard__table">
+		<div class="leaderBoard__row leaderBoard__header">
+			<span class="leaderBoard__column">Current Rank</span>
+			<span class="leaderBoard__column">Previous Rank</span>
+			<span class="leaderBoard__column">User</span>
+			<span class="leaderBoard__column"></span>
+		</div>
+
+		<div ng-repeat="player in ::leaderBoardCtrl.users track by player.id"
+			 class="leaderBoard__row">
+			<span class="leaderBoard__column">{{player.currRank}}</span>
+			<span class="leaderBoard__column">{{player.prevRank}}</span>
+			<span class="leaderBoard__column">
+				<div>{{player.name}}</div>
+			</span>
+			<span class="leaderBoard__column leaderBoard__link"
+					ng-click="leaderBoardCtrl.userPredictionsClicked({id: player.id})">See Predictions</span>
+		</div>
+	</div>
+
 </div>

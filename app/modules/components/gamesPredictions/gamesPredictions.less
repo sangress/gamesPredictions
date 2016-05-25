@@ -1,4 +1,40 @@
 .gamesPredictions {
 
-	text-align: center;
+	overflow: hidden;
+
+	&__row {
+		height: 50px;
+		line-height: 50px;
+		vertical-align: middle;
+
+		display: flex;
+		justify-content: flex-start;
+		align-content: flex-start;
+		flex-wrap: nowrap;
+
+		text-align: center;
+
+		&:not(:first-child):nth-child(even) {
+			background-color: antiquewhite;
+		}
+	}
+
+	&__column {
+		margin: 0 20px 0 0;
+		width: 250px;
+
+		white-space: nowrap;
+	}
+
+	&__header {
+		margin: 0 0 20px 0;
+		font-size: 15px;
+		font-weight: 600;
+		border-bottom: 1px solid #c80000;
+	}
+
+	&__select {
+		width: 100px;
+		margin: 0 auto;
+	}
 }

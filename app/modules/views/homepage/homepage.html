@@ -12,7 +12,8 @@
 		<my-page ng-switch-when="myPage"></my-page>
 		<games-predictions ng-switch-when="gamesPredictions"></games-predictions>
 		<qulification-prediction ng-switch-when="qulificationPrediction"></qulification-prediction>
-		<leader-board ng-switch-when="leaderBoard"></leader-board>
+		<leader-board ng-switch-when="leaderBoard"
+					  user-predictions-clicked="homepageCtrl.userPredictionsClicked(id)"></leader-board>
 		<users-predicts ng-switch-when="usersPredicts"></users-predicts>
 	</div>
 

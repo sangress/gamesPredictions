@@ -1,16 +1,15 @@
-<ui-select class="selectList"
-		   ng-model="selectListCtrl.model"
-		   ng-disabled="selectListCtrl.options.length < 2"
-		   theme="selectListFilter"
-		   append-to-body="true"
-		   search-enabled="false"
-		   on-select="selectListCtrl.onSelect($item, $model)">
+<div>
+	<ui-select class="selectList"
+			   ng-model="selectListCtrl.model"
+			   ng-disabled="selectListCtrl.options.length < 2"
+			   theme="selectListFilter"
+			   append-to-body="true"
+			   search-enabled="false"
+			   on-select="selectListCtrl.onSelect($item, $model)">
 
-	<ui-select-match placeholder="{{::selectListCtrl.placeholder}}">{{$select.selected.value}}</ui-select-match>
-	<ui-select-choices repeat="item.id as item in selectListCtrl.options | filter: { value: $select.search } track by $index">
-		<div>{{item.value}}</div>
-	</ui-select-choices>
-</ui-select>
-
-
-
+		<ui-select-match placeholder="{{::selectListCtrl.placeholder}}">{{$select.selected.value}}</ui-select-match>
+		<ui-select-choices repeat="item.id as item in selectListCtrl.options | filter: { value: $select.search } track by $index">
+			<div>{{item.value}}</div>
+		</ui-select-choices>
+	</ui-select>
+</div>
