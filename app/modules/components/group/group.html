@@ -1,0 +1,36 @@
+<div class="group">
+
+	<div class="group__row">
+		<div class="group__selectWinner">
+			<div class="group__selectionTitle">1st group 1 winner</div>
+			<div class="group__selectOptions">
+				<select-list ng-model="groupCtrl.runnerUpModel"
+							 options="groupCtrl.countries"></select-list>
+			</div>
+		</div>
+		<div class="group__selectScore">
+			<div class="group__selectionTitle">Total Score</div>
+			<div class="group__selectOptions">
+				<select-list ng-model="groupCtrl.totalScoreWinnerModel"
+							 options="groupCtrl.totalScore"></select-list>
+			</div>
+		</div>
+	</div>
+
+	<div class="group__row">
+		<div class="group__selectWinner">
+			<div class="group__selectionTitle">1st group 2nd place</div>
+			<div class="group__selectOptions">
+				<select-list ng-model="groupCtrl.secondPlaceModel"
+							 options="groupCtrl.countries"></select-list>
+			</div>
+		</div>
+		<div class="group__selectScore">
+			<div class="group__selectionTitle">Total Score</div>
+			<div class="group__selectOptions">
+				<select-list ng-model="groupCtrl.totalScoreSecondPlaceUpModel"
+							 options="groupCtrl.totalScore"></select-list>
+			</div>
+		</div>
+	</div>
+</div>

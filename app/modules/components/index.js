@@ -7,5 +7,6 @@ module.exports = angular.module('components', [
 	require('./leaderBoard/leaderBoard'),
 	require('./qulificationPrediction/qulificationPrediction'),
 	require('./selectList/selectList'),
-	require('./tab/tab')
+	require('./tab/tab'),
+	require('./group/group')
 ]);
