@@ -48,10 +48,19 @@
 }
 
 .view {
+	display: table-cell;
+	box-sizing: border-box;
 	width: 100vw;
 	height: 100vh;
+	text-align: center;
+	vertical-align: middle;
+
 
 	&__body {
+		display: inline-block;
+		box-sizing: border-box;
+		padding: 30px;
+		vertical-align: middle;
 		width: 1420px;
 		height: 800px;
 		background-color: #ffffff;
@@ -59,7 +68,6 @@
 		margin: 50px auto 0 auto;
 		opacity: 0.9;
 	}
-
 }
 
 .center {
