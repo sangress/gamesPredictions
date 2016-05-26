@@ -42,8 +42,8 @@ module.exports = {
 				loader: "style!css?sourceMap!less?sourceMap"
 			},
 			{
-				test: /\.(png|jpg)$/,
-				loader: 'url?limit=80192&name=[name].[ext]'
+				test: /\.(png|jpe?g)$/,
+				loader: 'url'
 			},
 			{
 				test: /\.html$/,
