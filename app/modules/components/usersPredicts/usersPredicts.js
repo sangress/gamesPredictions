@@ -12,17 +12,26 @@ function UsersPredictsController(UsersService) {
 
 	this.users = UsersService.getUsers().map(user => ({id: user.id, value: user.name}));
 
-	this.championsValues = [
-		{title: 'Champion:', value: "England"},
-		{title: 'Runner Up:', value: "England"},
-		{title: 'Group 1 winner:', value: "England"},
-		{title: 'Group 1 runner up:', value: "England"},
-		{title: 'Group 2 winner:', value: "England"},
-		{title: 'Group 2 runner up:', value: "England"},
-		{title: 'Group 3 winner:', value: "England"},
-		{title: 'Group 3 runner up:', value: "England"},
-		{title: 'Group 4 winner:', value: "England"},
-		{title: 'Group 4 runner up:', value: "England"}
+	this.champion = "England";
+	this.runnerUp = "England";
+
+	this.groups = [
+		[
+			{title: 'Group 1 winner:', value: "England"},
+			{title: 'Group 1 runner up:', value: "England"}
+		],
+		[
+			{title: 'Group 2 winner:', value: "England"},
+			{title: 'Group 2 runner up:', value: "England"}
+		],
+		[
+			{title: 'Group 3 winner:', value: "England"},
+			{title: 'Group 3 runner up:', value: "England"}
+		],
+		[
+			{title: 'Group 4 winner:', value: "England"},
+			{title: 'Group 4 runner up:', value: "England"}
+		]
 	];
 
 	this.onSelectedUser = () => {
@@ -30,10 +39,6 @@ function UsersPredictsController(UsersService) {
 		this.userName = user.value;
 	};
 
-
-	//this.games = [
-	//	{ }
-	//];
 }
 
 appModule.component('usersPredicts', {

@@ -7,7 +7,7 @@ const appModule = angular.module('homepage', []);
 HomepageController.$inject = [];
 function HomepageController() {
 
-	this.selectedPage = "gamesPredictions";
+	this.selectedPage = "usersPredicts";
 	this.tabClicked = (id) => this.selectedPage = id;
 
 	this.userPredictionsClicked = (id) => {
