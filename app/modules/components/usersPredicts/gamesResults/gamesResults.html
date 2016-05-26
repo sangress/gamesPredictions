@@ -1,0 +1,28 @@
+<div class="gamesResults">
+	<div class="gamesResults__table">
+		<div class="gamesResults__row gamesResults__header">
+			<span class="gamesResults__column">Team 1</span>
+			<span class="gamesResults__column">Team 2</span>
+			<span class="gamesResults__column">Time</span>
+			<span class="gamesResults__column">Winner</span>
+			<span class="gamesResults__column">Team 1 Goals</span>
+			<span class="gamesResults__column">Team 2 Goals</span>
+			<span class="gamesResults__column">Goal Difference</span>
+			<span class="gamesResults__column">First To Score</span>
+			<span class="gamesResults__column">Total</span>
+		</div>
+
+		<div ng-repeat="game in gamesResultsCtrl.games track by game.id"
+			 class="gamesResults__row">
+			<div class="gamesResults__column">{{game.teamOne}}</div>
+			<div class="gamesResults__column">{{game.teamTwo}}</div>
+			<div class="gamesResults__column">{{game.time}}</div>
+			<div class="gamesResults__column">{{game.winner}}</div>
+			<div class="gamesResults__column">{{game.teamOneGoals}}</div>
+			<div class="gamesResults__column">{{game.teamTwoGoals}}</div>
+			<div class="gamesResults__column">{{game.goalsDifference}}</div>
+			<div class="gamesResults__column">{{game.firstToScore}}</div>
+			<div class="gamesResults__column">{{game.total}}</div>
+		</div>
+	</div>
+</div>

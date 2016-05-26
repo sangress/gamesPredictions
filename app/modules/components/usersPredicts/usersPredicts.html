@@ -1,3 +1,24 @@
-<div class="topPredicts">
-	topPredicts
+<div class="usersPredicts">
+
+	<div class="usersPredicts__header">
+		<div>Select a user:</div>
+		<div class="usersPredicts__selectUser">
+			<select-list ng-model="usersPredictsCtrl.userSelected"
+						 ng-change="usersPredictsCtrl.onSelectedUser()"
+						 options="usersPredictsCtrl.users"></select-list>
+		</div>
+	</div>
+	<div class="usersPredicts__details" ng-if="usersPredictsCtrl.userSelected">
+		<div class="usersPredicts__championsDetails">
+			<div>{{usersPredictsCtrl.userName}}'s Qualification Predictions:</div>
+			<div class="usersPredicts__championsDetails--row"
+				 ng-repeat="row in usersPredictsCtrl.championsValues track by $index">
+				<div class="usersPredicts__championsDetails--title">{{row.title}}</div>
+				<div class="usersPredicts__championsDetails--value">{{row.value}}</div>
+			</div>
+		</div>
+		<div class="usersPredicts__gamesDetails">
+			<games-results></games-results>
+		</div>
+	</div>
 </div>
