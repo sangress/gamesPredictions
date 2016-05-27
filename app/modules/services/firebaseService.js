@@ -23,9 +23,11 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 
 	//countries
 	const getCountries = () => fbDb.ref('/countries/').once('value').then(resultsFun);
-	const addCountries = (countries) => {
-		fbDb.ref('/countries').set(countries);
-	};
+	const setCountries = (countries) => fbDb.ref('/countries').set(countries);
+
+	//groups
+	const getGroups = () => fbDb.ref('/groups/').once('value').then(resultsFun);
+	const setGroups = (groups) => fbDb.ref('/groups').set(groups);
 
 
 	// The public API interface
@@ -33,8 +35,10 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 		addGame,
 		getGames,
 		getGame,
-		addCountries,
-		getCountries
+		setCountries,
+		getCountries,
+		getGroups,
+		setGroups
 	};
 
 	}]);

@@ -34,10 +34,55 @@ function CountriesController(FirebaseService, $scope) {
 		"Wales"
 	];
 
-	//FirebaseService.addCountries(c);
+	//FirebaseService.setCountries(c);
 
-	FirebaseService.getCountries().then(countries =>
-		$scope.$apply(() => this.countries = countries));
+	//FirebaseService.getCountries().then(countries =>
+	//	$scope.$apply(() => this.countries = countries));
+
+
+
+	const groups = {
+		A: [
+			"Albania",
+			"France",
+			"Romania",
+			"Switzerland"
+		],
+		B: [
+			"England",
+			"Russia",
+			"Slovakia",
+			"Wales"
+		],
+		C: [
+			"Germany",
+			"Northern Ireland",
+			"Poland",
+			"Ukraine"
+		],
+		D: [
+			"Croatia",
+			"Czech Republic",
+			"Spain",
+			"Turkey"
+		],
+		E: [
+			"Belgium",
+			"Italy",
+			"Republic of Ireland",
+			"Sweden"
+		],
+		F: [
+			"Austria",
+			"Hungary",
+			"Iceland",
+			"Portugal"
+		]
+	};
+
+	//FirebaseService.setGroups(groups);
+	FirebaseService.getGroups()
+		.then(groups =>	console.log(groups));
 }
 
 appModule.component('countries', {
