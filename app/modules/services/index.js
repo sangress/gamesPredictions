@@ -3,5 +3,6 @@
 module.exports = angular.module('services', [
 	require('./usersService'),
 	require('./countriesService'),
-	require('./gamesService')
+	require('./gamesService'),
+	require('./firebaseService')
 ]);

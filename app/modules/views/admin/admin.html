@@ -1,0 +1,15 @@
+<div class="admin">
+
+	<div class="admin__tabsContainer">
+		<tab ng-repeat="tab in adminCtrl.tabs track by tab.id"
+			 tab-name="{{tab.name}}"
+			 id="{{tab.id}}"
+			 ng-model="adminCtrl.selectedPage"
+			 ng-click="adminCtrl.tabClicked(tab.id)"></tab>
+	</div>
+
+	<div ng-switch="adminCtrl.selectedPage">
+		<countries ng-switch-when="countries"></countries>
+	</div>
+
+</div>
