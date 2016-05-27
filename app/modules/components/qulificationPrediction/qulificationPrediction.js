@@ -1,12 +1,14 @@
 "use strict";
 
 require('./qulificationPrediction.less');
+const _ = require('lodash');
 
+const appModule = angular.module('qulificationPrediction', [
+	require('./group/group')
+]);
 
-const appModule = angular.module('qulificationPrediction', []);
-
-QulificationPredictionController.$inject = ['CountriesService'];
-function QulificationPredictionController(CountriesService) {
+QulificationPredictionController.$inject = ['CountriesService', 'FirebaseService', '$scope'];
+function QulificationPredictionController(CountriesService, FirebaseService, $scope) {
 
 	this.countriesOptions = CountriesService.getCountries().map(country => ({id: country.id, value: country.country}));
 	
@@ -22,6 +24,17 @@ function QulificationPredictionController(CountriesService) {
 		{id: 8, value: '8'},
 		{id: 9, value: '9'}
 	];
+
+	FirebaseService.getGroups()
+		.then(groups =>	{
+			const groupsNames = _.keys(groups);
+			const g = groupsNames.reduce((arr, name) => {
+				arr.push({name: name, countries: groups[name]});
+				return arr;
+			}, []);
+
+			$scope.$apply(() => this.groups = g);
+		});
 }
 
 appModule.component('qulificationPrediction', {

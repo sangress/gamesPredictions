@@ -1,11 +1,13 @@
 <div class="group">
 
+	<div class="group__groupName">{{groupCtrl.groupName}}</div>
+
 	<div class="group__row">
 		<div class="group__selectWinner">
-			<div class="group__selectionTitle">1st group 1 winner</div>
+			<div class="group__selectionTitle">1st place</div>
 			<div class="group__selectOptions">
 				<select-list ng-model="groupCtrl.runnerUpModel"
-							 options="groupCtrl.countries"></select-list>
+							 options="groupCtrl.countriesOptions"></select-list>
 			</div>
 		</div>
 		<div class="group__selectScore">
@@ -19,10 +21,10 @@
 
 	<div class="group__row">
 		<div class="group__selectWinner">
-			<div class="group__selectionTitle">1st group 2nd place</div>
+			<div class="group__selectionTitle">2nd place</div>
 			<div class="group__selectOptions">
 				<select-list ng-model="groupCtrl.secondPlaceModel"
-							 options="groupCtrl.countries"></select-list>
+							 options="groupCtrl.countriesOptions"></select-list>
 			</div>
 		</div>
 		<div class="group__selectScore">

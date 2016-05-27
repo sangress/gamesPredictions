@@ -8,12 +8,14 @@ const appModule = angular.module('group', []);
 GroupController.$inject = [];
 function GroupController() {
 
+	this.countriesOptions = this.countries.map(country => ({id: country, value: country}));
 }
 
 appModule.component('group', {
 	bindings: {
 		countries: "=",
-		totalScore: "="
+		totalScore: "=",
+		groupName: "@"
 	},
 	controllerAs: 'groupCtrl',
 	controller: GroupController,

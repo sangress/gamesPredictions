@@ -50,16 +50,9 @@
 	</div>
 
 	<div class="qulificationPrediction__box qulificationPrediction__groups">
-		<group countries="qulificationPredictionCtrl.countriesOptions"
-			   total-score="qulificationPredictionCtrl.scoreOptions"
-			   class="qulificationPrediction__group"></group>
-		<group countries="qulificationPredictionCtrl.countriesOptions"
-			   total-score="qulificationPredictionCtrl.scoreOptions"
-			   class="qulificationPrediction__group"></group>
-		<group countries="qulificationPredictionCtrl.countriesOptions"
-			   total-score="qulificationPredictionCtrl.scoreOptions"
-			   class="qulificationPrediction__group"></group>
-		<group countries="qulificationPredictionCtrl.countriesOptions"
+		<group ng-repeat="group in qulificationPredictionCtrl.groups track by $index"
+			   group-name="{{group.name}}"
+			   countries="group.countries"
 			   total-score="qulificationPredictionCtrl.scoreOptions"
 			   class="qulificationPrediction__group"></group>
 	</div>
