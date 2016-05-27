@@ -81,8 +81,8 @@ function CountriesController(FirebaseService, $scope) {
 	};
 
 	//FirebaseService.setGroups(groups);
-	FirebaseService.getGroups()
-		.then(groups =>	console.log(groups));
+	//FirebaseService.getGroups()
+	//	.then(groups =>	console.log(groups));
 }
 
 appModule.component('countries', {

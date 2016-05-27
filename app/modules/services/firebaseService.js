@@ -10,31 +10,39 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 
 
 	// games
-	const getGames = () => fbDb.ref('/games/').once('value').then(resultsFun);
-	const getGame = (gameId) => fbDb.ref('/games/' + gameId).once('value').then(resultsFun);
 
-	const addGame = (game) => {
-		getGames.then((gamesList) => {
-			game.id = gamesList.length;
-			fbDb.ref('games/' + game.id).set(game);
-		});
-	};
+	//const getGame = (gameId) => fbDb.ref('/games/' + gameId).once('value').then(resultsFun);
 
-
-	//countries
+	//Countries
 	const getCountries = () => fbDb.ref('/countries/').once('value').then(resultsFun);
 	const setCountries = (countries) => fbDb.ref('/countries').set(countries);
 
-	//groups
+	//Groups
 	const getGroups = () => fbDb.ref('/groups/').once('value').then(resultsFun);
 	const setGroups = (groups) => fbDb.ref('/groups').set(groups);
 
+	//Games
+	const getGames = () => fbDb.ref('/games/').once('value').then(resultsFun);
+	const addGame = (id, time, team1 = null, team2 = null) => {
+		const game = {
+			id: id,
+			teamOne: team1,
+			teamTwo: team2,
+			time: (new Date(time)).getTime(),
+			isActive: team1 !== null && team2 !== null,
+			winner: null,
+			teamOneGoals: 0,
+			teamTwoGoals: 0,
+			goalDifference: 0,
+			firstToScore: null
+		};
+		fbDb.ref('games/' + id).set(game);
+	};
 
 	// The public API interface
 	return {
 		addGame,
 		getGames,
-		getGame,
 		setCountries,
 		getCountries,
 		getGroups,

@@ -9,5 +9,6 @@ module.exports = angular.module('components', [
 	require('./selectList/selectList'),
 	require('./tab/tab'),
 	require('./group/group'),
-	require('./countries/countries')
+	require('./countries/countries'),
+	require('./games/games')
 ]);

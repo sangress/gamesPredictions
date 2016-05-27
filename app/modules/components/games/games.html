@@ -1,0 +1,58 @@
+<div class="games">
+	<div class="games__table">
+		<div class="games__row games__header">
+			<span class="games__column">Team 1</span>
+			<span class="games__column">Team 2</span>
+			<span class="games__column">Time</span>
+			<span class="games__column">Winner</span>
+			<span class="games__column">Team 1 Goals</span>
+			<span class="games__column">Team 2 Goals</span>
+			<span class="games__column">Goal Difference</span>
+			<span class="games__column">First To Score</span>
+			<span class="games__column games__action"></span>
+		</div>
+
+		<div class="games__row"
+			 ng-repeat="game in ::gamesCtrl.games track by game.id">
+
+			<div class="games__column">{{game.teamOne}}</div>
+
+			<div class="games__column">{{game.teamTwo}}</div>
+
+			<div class="games__column">{{game.time | date:"d.M.y H:mm"}}</div>
+
+			<div class="games__column">
+				<div class="games__select">
+					<select-list ng-model="game.winnersModel"
+								 options="game.winnersOptions"></select-list>
+				</div>
+			</div>
+			<div class="games__column">
+				<div class="games__select">
+					<select-list ng-model="game.teamOneGoalsModel"
+								 options="gamesCtrl.teamOneGoalsOptions"></select-list>
+				</div>
+			</div>
+			<div class="games__column">
+				<div class="games__select">
+					<select-list ng-model="game.teamTwoGoalsModel"
+								 options="gamesCtrl.teamTwoGoalsOptions"></select-list>
+				</div>
+			</div>
+			<div class="games__column">
+				<div class="games__select">
+					<select-list ng-model="game.goalDifferenceModel"
+								 options="gamesCtrl.goalDifferenceOptions"></select-list>
+				</div>
+			</div>
+			<div class="games__column">
+				<div class="games__select">
+					<select-list ng-model="game.firstToScoreModel"
+								 options="game.firstToScoreOptions"></select-list>
+				</div>
+			</div>
+
+			<div class="games__column games__action">V</div>
+		</div>
+	</div>
+</div>
