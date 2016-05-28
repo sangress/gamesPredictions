@@ -58,12 +58,16 @@ appModule.factory('FacebookService', [ 'facebook',
 		const me = (cb) =>
 			facebookPromise.then(FB => FB.api('/me', { locale: 'en_US', fields: 'id, name, email' }, cb));
 
+		const getPicture = (userId, cb) =>
+			facebookPromise.then(FB => FB.api(userId + '/picture', cb));
+
 		// The public API interface
 		return {
 			login,
 			logout,
 			getLoginStatus,
-			me
+			me,
+			getPicture
 		};
 
 	}]);

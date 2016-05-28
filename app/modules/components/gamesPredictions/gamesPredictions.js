@@ -25,8 +25,6 @@ function GamesPredictionsController() {
 	this.teamTwoGoalsOptions = teamGoalsOptions;
 	this.goalDifferenceOptions = teamGoalsOptions;
 
-	console.log(this.userGamesPredictions);
-
 	this.games = this.userGamesPredictions.map(game => {
 		return {
 			id: game.id,

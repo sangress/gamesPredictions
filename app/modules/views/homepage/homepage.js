@@ -4,8 +4,8 @@ require('./homepage.less');
 
 const appModule = angular.module('homepage', []);
 
-HomepageController.$inject = ['user'];
-function HomepageController(user) {
+HomepageController.$inject = ['user', 'FacebookService', '$scope'];
+function HomepageController(user, FacebookService, $scope) {
 
 	this.user = user;
 	this.selectedPage = "myPage";
@@ -20,6 +20,13 @@ function HomepageController(user) {
 		{id: 'leaderBoard', name: 'Leader Board'},
 		{id: 'usersPredicts', name: 'Users Predicts'}
 	];
+
+	this.pictureUrl = "cd";
+
+	FacebookService.getPicture(this.user.id,
+		(response) => {
+			$scope.$apply(()=> this.pictureUrl = response.data.url);
+		});
 }
 
 getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout'];
