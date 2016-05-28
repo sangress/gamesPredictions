@@ -13,15 +13,15 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 
 	//const getGame = (gameId) => fbDb.ref('/games/' + gameId).once('value').then(resultsFun);
 
-	//Countries
+	// Countries
 	const getCountries = () => fbDb.ref('/countries/').once('value').then(resultsFun);
 	const setCountries = (countries) => fbDb.ref('/countries').set(countries);
 
-	//Groups
+	// Groups
 	const getGroups = () => fbDb.ref('/groups/').once('value').then(resultsFun);
 	const setGroups = (groups) => fbDb.ref('/groups').set(groups);
 
-	//Games
+	// Games
 	const getGames = () => fbDb.ref('/games/').once('value').then(resultsFun);
 	const addGame = (id, time, team1 = null, team2 = null) => {
 		const game = {
@@ -39,6 +39,12 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 		fbDb.ref('games/' + id).set(game);
 	};
 
+	// Users
+	const getUsers = () => fbDb.ref('/users/').once('value').then(resultsFun);
+	const getUser = (id) => fbDb.ref('/users/' + id).once('value').then(resultsFun);
+	const isUserExist = (id) => fbDb.ref('/users/' + id).once('value').then((resuls) => resuls.val() !== null);
+	const addUser = (user) => fbDb.ref('users/' + user.id).set(user);
+
 	// The public API interface
 	return {
 		addGame,
@@ -46,10 +52,13 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 		setCountries,
 		getCountries,
 		getGroups,
-		setGroups
+		setGroups,
+		getUsers,
+		getUser,
+		addUser,
+		isUserExist
 	};
-
-	}]);
+}]);
 
 
 

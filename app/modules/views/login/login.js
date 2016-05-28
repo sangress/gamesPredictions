@@ -4,62 +4,53 @@ require('./login.less');
 
 const appModule = angular.module('login', []);
 
-LoginController.$inject = ['FacebookService', 'loginStatus', '$state', 'loginService'];
-function LoginController(FacebookService, loginStatus, $state, loginService) {
+LoginController.$inject = ['FacebookService', 'loginStatus', '$state', 'loginService', 'FirebaseService', 'userService'];
+function LoginController(FacebookService, loginStatus, $state, loginService, FirebaseService, userService) {
+
+
+	//userService.getNewUserDetails();
+
 
 	this.onLogin = () => {
-		FacebookService.login({scope: 'email,public_profile'},
+		FacebookService.login({scope: 'email, public_profile'},
 			(response) => {
 				if (response.authResponse) {
-					console.log('Welcome!  Fetching your information.... ');
-					loginService.setLoggedStatus(true);
-					$state.go('homepage', {}, {
-						location: 'replace',
-						reload: true
-					});
+					FacebookService.me((response) => {
+						FirebaseService.getUser(response.id).then(user => {
 
-					//FB.api('/me', function(response) {
-					//	console.log('Good to see you, ' + response.name + '.');
-					//});
+							if (user !== null) {
+								loginService.setUser(user);
+								$state.go('homepage', {}, {
+									location: 'replace',
+									reload: true
+								});
+
+								return;
+							}
+
+							userService.getNewUserDetails(response.id, response.name, response.email)
+								.then(user => {
+									FirebaseService.addUser(user);
+									loginService.setUser(user);
+									$state.go('homepage', {}, {
+										location: 'replace',
+										reload: true
+									});
+								});
+
+						});
+					});
 				} else {
 					console.log('User cancelled login or did not fully authorize.');
 				}
-
-				//console.log(response);
-				//this.status = response.status;
 			});
 	};
-
-	this.onLogout = () => FacebookService.logout();
-
-	this.status = loginStatus;
-
-
-
-	// fb status: 'unknown', 'connected'
-
-	//login(function(response) {
-	//	if (response.authResponse) {
-	//		console.log('Welcome!  Fetching your information.... ');
-	//		FB.api('/me', function(response) {
-	//			console.log('Good to see you, ' + response.name + '.');
-	//		});
-	//	} else {
-	//		console.log('User cancelled login or did not fully authorize.');
-	//	}
-	//});
-
 }
 
 getFacebookStatus.$inject = ['FacebookService', '$q'];
 function getFacebookStatus (FacebookService, $q) {
-
 	const deferred = $q.defer();
-	FacebookService.getLoginStatus( (response) =>{
-		console.log(response);
-		deferred.resolve(response.status);
-	});
-
+	FacebookService.getLoginStatus( (response) => deferred.resolve(response.status));
 	return deferred.promise;
 }
 

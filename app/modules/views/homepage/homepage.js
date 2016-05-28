@@ -4,17 +4,14 @@ require('./homepage.less');
 
 const appModule = angular.module('homepage', []);
 
-HomepageController.$inject = [];
-function HomepageController() {
+HomepageController.$inject = ['user'];
+function HomepageController(user) {
 
+	this.user = user;
 	this.selectedPage = "myPage";
 	this.tabClicked = (id) => this.selectedPage = id;
 
-	this.userPredictionsClicked = (id) => {
-		console.log(id);
-		this.tabClicked('usersPredicts');
-	};
-
+	this.userPredictionsClicked = (id) => this.tabClicked('usersPredicts');
 
 	this.tabs = [
 		{id: 'myPage', name: 'My Page'},
@@ -28,8 +25,8 @@ function HomepageController() {
 getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout'];
 function getLoginStatus (loginService, $state, $q, $timeout) {
 
-	if (loginService.isLoggedin()) {
-		return $q.resolve();
+	if (loginService.isLoggedIn()) {
+		return $q.resolve(loginService.getUser());
 	}
 
 	$timeout(() => $state.go('login', {}, {
@@ -49,7 +46,7 @@ appModule.config(['$stateProvider', '$urlRouterProvider',
 				controller: HomepageController,
 				controllerAs: 'homepageCtrl',
 				resolve: {
-					loginStatus: getLoginStatus
+					user: getLoginStatus
 				}
 			});
 		//$urlRouterProvider.otherwise('/');

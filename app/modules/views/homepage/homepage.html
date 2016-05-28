@@ -9,11 +9,14 @@
 			 id="{{tab.id}}"
 			 ng-model="homepageCtrl.selectedPage"
 			 ng-click="homepageCtrl.tabClicked(tab.id)"></tab>
+
+
 	</div>
 
 	<div ng-switch="homepageCtrl.selectedPage">
 		<my-page ng-switch-when="myPage"></my-page>
-		<games-predictions ng-switch-when="gamesPredictions"></games-predictions>
+		<games-predictions ng-switch-when="gamesPredictions"
+						   user-games-predictions="homepageCtrl.user.gamesPredictions"></games-predictions>
 		<qulification-prediction ng-switch-when="qulificationPrediction"></qulification-prediction>
 		<leader-board ng-switch-when="leaderBoard"
 					  user-predictions-clicked="homepageCtrl.userPredictionsClicked(id)"></leader-board>

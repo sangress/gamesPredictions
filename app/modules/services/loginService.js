@@ -4,15 +4,16 @@ const appModule = angular.module('loginService', []);
 
 appModule.factory('loginService', () => {
 
-	let userLoggedin = false;
+	let _user = null;
 
-	const isLoggedin = () => (userLoggedin);
-	const setLoggedStatus = (status) => (userLoggedin = status);
-
+	const isLoggedIn = () => (_user !== null);
+	const setUser = (user) => (_user = user);
+	const getUser = () => (_user);
 	// The public API interface
 	return {
-		isLoggedin,
-		setLoggedStatus
+		isLoggedIn,
+		setUser,
+		getUser
 	};
 
 });

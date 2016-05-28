@@ -56,7 +56,7 @@ appModule.factory('FacebookService', [ 'facebook',
 			facebookPromise.then(FB => FB.logout(cb));
 
 		const me = (cb) =>
-			facebookPromise.then(FB => FB.api('/me', cb));
+			facebookPromise.then(FB => FB.api('/me', { locale: 'en_US', fields: 'id, name, email' }, cb));
 
 		// The public API interface
 		return {

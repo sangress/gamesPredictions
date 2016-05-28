@@ -25,22 +25,23 @@ function GamesPredictionsController() {
 	this.teamTwoGoalsOptions = teamGoalsOptions;
 	this.goalDifferenceOptions = teamGoalsOptions;
 
-	//this.games = GamesService.getGames().map(game => {
-	//	return {
-	//		id: game.id,
-	//		teamOne: game.teamOne.value,
-	//		teamTwo: game.teamTwo.value,
-	//		time: game.time,
-	//		winnersOptions: [{id: 0, value: 'draw'}, game.teamOne, game.teamTwo],
-    //
-	//		firstToScoreOptions: [{id: 0, value: 'none'}, game.teamOne, game.teamTwo]
-	//	};
-	//});
+	console.log(this.userGamesPredictions);
+
+	this.games = this.userGamesPredictions.map(game => {
+		return {
+			id: game.id,
+			teamOne: game.teamOne,
+			teamTwo: game.teamTwo,
+			time: game.time,
+			winnersOptions: [{id: 0, value: 'draw'}, {id: game.teamOne, value: game.teamOne}, {id: game.teamTwo, value: game.teamTwo}],
+			firstToScoreOptions: [{id: 0, value: 'none'}, {id: game.teamOne, value: game.teamOne}, {id: game.teamTwo, value: game.teamTwo}]
+		};
+	});
 }
 
 appModule.component('gamesPredictions', {
 	bindings: {
-
+		userGamesPredictions: "="
 	},
 	controllerAs: 'gamesPredictionsCtrl',
 	controller: GamesPredictionsController,
