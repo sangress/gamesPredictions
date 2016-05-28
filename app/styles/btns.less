@@ -13,6 +13,44 @@
   position: relative;
   transition: all 0.3s;
 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &-facebook {
+	padding: 6px 12px 6px 44px;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	color: #fff;
+	background-color: #3b5998;
+	border: 1px solid rgba(0,0,0,0.2);
+	border-radius: 4px;
+
+	>:first-child {
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  bottom: 0;
+	  width: 32px;
+	  line-height: 34px;
+	  font-size: 1.6em;
+	  text-align: center;
+	  border-right: 1px solid rgba(0,0,0,0.2);
+	}
+
+	&:hover {
+	  background-color: #2d4373;
+	}
+
+	&:focus {
+	  background-color: #23345a;
+	}
+  }
+
   //&--circle {
 	//border-radius: 50%;
   //}
