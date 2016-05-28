@@ -4,20 +4,20 @@ require('./login.less');
 
 const appModule = angular.module('login', []);
 
-LoginController.$inject = ['FacebookService', 'loginStatus', '$state'];
-function LoginController(FacebookService, loginStatus, $state) {
-
-	//console.log(loginStatus);
+LoginController.$inject = ['FacebookService', 'loginStatus', '$state', 'loginService'];
+function LoginController(FacebookService, loginStatus, $state, loginService) {
 
 	this.onLogin = () => {
 		FacebookService.login({scope: 'email,public_profile'},
 			(response) => {
 				if (response.authResponse) {
 					console.log('Welcome!  Fetching your information.... ');
+					loginService.setLoggedStatus(true);
 					$state.go('homepage', {}, {
 						location: 'replace',
 						reload: true
 					});
+
 					//FB.api('/me', function(response) {
 					//	console.log('Good to see you, ' + response.name + '.');
 					//});

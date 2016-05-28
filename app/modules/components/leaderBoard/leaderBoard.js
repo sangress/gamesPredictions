@@ -5,10 +5,10 @@ const _ = require('lodash');
 
 const appModule = angular.module('leaderBoard', []);
 
-LeaderBoardController.$inject = ['UsersService'];
+LeaderBoardController.$inject = [];
 function LeaderBoardController(UsersService) {
 
-	this.users = _.sortBy(UsersService.getUsers(), (user) => user.currRank);
+	//this.users = _.sortBy(UsersService.getUsers(), (user) => user.currRank);
 
 }
 

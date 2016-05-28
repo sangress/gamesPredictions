@@ -3,12 +3,10 @@
 require('./gamesPredictions.less');
 
 
-const appModule = angular.module('gamesPredictions', [
-	require('./gamePrediction/gamePrediction')
-]);
+const appModule = angular.module('gamesPredictions', []);
 
-GamesPredictionsController.$inject = ['GamesService'];
-function GamesPredictionsController(GamesService) {
+GamesPredictionsController.$inject = [];
+function GamesPredictionsController() {
 
 	const teamGoalsOptions = [
 		{id: 0, value: '0'},
@@ -27,17 +25,17 @@ function GamesPredictionsController(GamesService) {
 	this.teamTwoGoalsOptions = teamGoalsOptions;
 	this.goalDifferenceOptions = teamGoalsOptions;
 
-	this.games = GamesService.getGames().map(game => {
-		return {
-			id: game.id,
-			teamOne: game.teamOne.value,
-			teamTwo: game.teamTwo.value,
-			time: game.time,
-			winnersOptions: [{id: 0, value: 'draw'}, game.teamOne, game.teamTwo],
-
-			firstToScoreOptions: [{id: 0, value: 'none'}, game.teamOne, game.teamTwo]
-		};
-	});
+	//this.games = GamesService.getGames().map(game => {
+	//	return {
+	//		id: game.id,
+	//		teamOne: game.teamOne.value,
+	//		teamTwo: game.teamTwo.value,
+	//		time: game.time,
+	//		winnersOptions: [{id: 0, value: 'draw'}, game.teamOne, game.teamTwo],
+    //
+	//		firstToScoreOptions: [{id: 0, value: 'none'}, game.teamOne, game.teamTwo]
+	//	};
+	//});
 }
 
 appModule.component('gamesPredictions', {

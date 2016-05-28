@@ -25,6 +25,21 @@ function HomepageController() {
 	];
 }
 
+getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout'];
+function getLoginStatus (loginService, $state, $q, $timeout) {
+
+	if (loginService.isLoggedin()) {
+		return $q.resolve();
+	}
+
+	$timeout(() => $state.go('login', {}, {
+		location: 'replace',
+		reload: true
+	}));
+
+	return $q.reject();
+}
+
 appModule.config(['$stateProvider', '$urlRouterProvider',
 	function ($stateProvider, $urlRouterProvider) {
 		$stateProvider
@@ -32,9 +47,11 @@ appModule.config(['$stateProvider', '$urlRouterProvider',
 				url: '/homepage',
 				template: require('./homepage.html'),
 				controller: HomepageController,
-				controllerAs: 'homepageCtrl'
+				controllerAs: 'homepageCtrl',
+				resolve: {
+					loginStatus: getLoginStatus
+				}
 			});
-
 		//$urlRouterProvider.otherwise('/');
 	}]);
 

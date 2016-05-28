@@ -7,10 +7,10 @@ const appModule = angular.module('usersPredicts', [
 	require('./gamesResults/gamesResults')
 ]);
 
-UsersPredictsController.$inject = ['UsersService'];
-function UsersPredictsController(UsersService) {
+UsersPredictsController.$inject = [];
+function UsersPredictsController() {
 
-	this.users = UsersService.getUsers().map(user => ({id: user.id, value: user.name}));
+	//this.users = UsersService.getUsers().map(user => ({id: user.id, value: user.name}));
 
 	this.champion = "England";
 	this.runnerUp = "England";

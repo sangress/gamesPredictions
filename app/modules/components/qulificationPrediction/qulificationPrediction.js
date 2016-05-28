@@ -7,11 +7,9 @@ const appModule = angular.module('qulificationPrediction', [
 	require('./group/group')
 ]);
 
-QulificationPredictionController.$inject = ['CountriesService', 'FirebaseService', '$scope'];
-function QulificationPredictionController(CountriesService, FirebaseService, $scope) {
+QulificationPredictionController.$inject = ['FirebaseService', '$scope'];
+function QulificationPredictionController(FirebaseService, $scope) {
 
-	this.countriesOptions = CountriesService.getCountries().map(country => ({id: country.id, value: country.country}));
-	
 	this.scoreOptions = [
 		{id: 0, value: '0'},
 		{id: 1, value: '1'},

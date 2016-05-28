@@ -1,13 +1,14 @@
 <div class="homepage">
 
+
 	<div class="homepage__tabsContainer">
+		<div class="homepage__appName">Euro 2016 |</div>
+
 		<tab ng-repeat="tab in homepageCtrl.tabs track by tab.id"
 			 tab-name="{{tab.name}}"
 			 id="{{tab.id}}"
 			 ng-model="homepageCtrl.selectedPage"
 			 ng-click="homepageCtrl.tabClicked(tab.id)"></tab>
-
-
 	</div>
 
 	<div ng-switch="homepageCtrl.selectedPage">
