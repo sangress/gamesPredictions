@@ -7,7 +7,7 @@ const appModule = angular.module('homepage', []);
 HomepageController.$inject = [];
 function HomepageController() {
 
-	this.selectedPage = "qulificationPrediction";
+	this.selectedPage = "myPage";
 	this.tabClicked = (id) => this.selectedPage = id;
 
 	this.userPredictionsClicked = (id) => {
@@ -29,13 +29,13 @@ appModule.config(['$stateProvider', '$urlRouterProvider',
 	function ($stateProvider, $urlRouterProvider) {
 		$stateProvider
 			.state('homepage', {
-				url: '/',
+				url: '/homepage',
 				template: require('./homepage.html'),
 				controller: HomepageController,
 				controllerAs: 'homepageCtrl'
 			});
 
-		$urlRouterProvider.otherwise('/');
+		//$urlRouterProvider.otherwise('/');
 	}]);
 
 module.exports = appModule.name;
