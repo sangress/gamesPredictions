@@ -1,16 +1,29 @@
 .homepage {
 
+  &__tabsContainer {
+	text-align: left;
+	border-bottom: 1px solid #ffffff;
 
-	&__tabsContainer {
-		text-align: left;
-	}
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	flex-direction: row
+  }
+
+  &__tabsContent {
+	border-top: 1px solid #a2a8b8;
+  }
 
   &__appName {
 	display: inline-block;
 	margin: 0 20px 0 0;
+	height: 100%;
 	color: #2d4373;
 	font-size: 18px;
 	font-weight: 500;
+	line-height: 70px;
+	vertical-align: middle;
+	white-space: nowrap;
   }
 
   &__profilePic{
