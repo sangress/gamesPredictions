@@ -8,6 +8,9 @@ HomepageController.$inject = ['user', 'FacebookService', '$scope'];
 function HomepageController(user, FacebookService, $scope) {
 
 	this.user = user;
+	
+	console.log(this.user);
+	
 	this.selectedPage = "myPage";
 	this.tabClicked = (id) => this.selectedPage = id;
 
@@ -23,17 +26,23 @@ function HomepageController(user, FacebookService, $scope) {
 
 	this.pictureUrl = "cd";
 
-	FacebookService.getPicture(this.user.id,
+	FacebookService.getPicture(user.id,
 		(response) => {
+			console.log(response);
 			$scope.$apply(()=> this.pictureUrl = response.data.url);
 		});
 }
 
-getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout'];
-function getLoginStatus (loginService, $state, $q, $timeout) {
+getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout', 'FirebaseService'];
+function getLoginStatus (loginService, $state, $q, $timeout, FirebaseService) {
 
 	if (loginService.isLoggedIn()) {
-		return $q.resolve(loginService.getUser());
+
+		console.log("gfd");
+		FirebaseService.getAuthResponse(results => console.log(results)); //.then(results => console.log(results));
+
+		console.log("gfd--2");
+		return FirebaseService.getUser(loginService.getUserId());
 	}
 
 	$timeout(() => $state.go('login', {}, {
