@@ -2,7 +2,7 @@
 
 
 	<div class="homepage__tabsContainer">
-		<div class="homepage__appName">Euro 2016 |</div>
+		<div class="homepage__appName">Euro 2016</div>
 
 		<tab ng-repeat="tab in homepageCtrl.tabs track by tab.id"
 			 tab-name="{{tab.name}}"
@@ -13,7 +13,7 @@
 		<img ng-src="{{homepageCtrl.pictureUrl}}" class="homepage__profilePic"/>
 	</div>
 
-	<div ng-switch="homepageCtrl.selectedPage">
+	<div class="homepage__tabsContent" ng-switch="homepageCtrl.selectedPage">
 		<my-page ng-switch-when="myPage"></my-page>
 		<games-predictions ng-switch-when="gamesPredictions"
 						   user-games-predictions="homepageCtrl.user.gamesPredictions"></games-predictions>
