@@ -8,7 +8,7 @@ HomepageController.$inject = ['user', 'FacebookService', '$scope'];
 function HomepageController(user, FacebookService, $scope) {
 
 	this.user = user;
-	this.selectedPage = "myPage";
+	this.selectedPage = "gamesPredictions";
 	this.tabClicked = (id) => this.selectedPage = id;
 
 	this.userPredictionsClicked = (id) => this.tabClicked('usersPredicts');
@@ -21,27 +21,28 @@ function HomepageController(user, FacebookService, $scope) {
 		{id: 'usersPredicts', name: 'Users Predicts'}
 	];
 
-	this.pictureUrl = "cd";
-
-	FacebookService.getPicture(this.user.id,
-		(response) => {
-			$scope.$apply(()=> this.pictureUrl = response.data.url);
-		});
+	//this.pictureUrl = "cd";
+	//FacebookService.getPicture(this.user.id,
+	//	(response) => {
+	//		$scope.$apply(()=> this.pictureUrl = response.data.url);
+	//	});
 }
 
-getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout'];
-function getLoginStatus (loginService, $state, $q, $timeout) {
+getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout', 'FirebaseService'];
+function getLoginStatus (loginService, $state, $q, $timeout, FirebaseService) {
 
-	if (loginService.isLoggedIn()) {
-		return $q.resolve(loginService.getUser());
-	}
+	return FirebaseService.getUser('10153471103786104');
 
-	$timeout(() => $state.go('login', {}, {
-		location: 'replace',
-		reload: true
-	}));
-
-	return $q.reject();
+	//if (loginService.isLoggedIn()) {
+	//	return loginService.getUser();
+	//}
+    //
+	//$timeout(() => $state.go('login', {}, {
+	//	location: 'replace',
+	//	reload: true
+	//}));
+    //
+	//return $q.reject();
 }
 
 appModule.config(['$stateProvider', '$urlRouterProvider',

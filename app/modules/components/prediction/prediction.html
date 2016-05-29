@@ -1,0 +1,46 @@
+<div class="{{predictionCtrl.columnClass}}">{{predictionCtrl.game.teamOne}}</div>
+
+<div class="{{predictionCtrl.columnClass}}">{{predictionCtrl.game.teamTwo}}</div>
+
+<div class="{{predictionCtrl.columnClass}}">{{predictionCtrl.game.time | date:"d.M.y H:mm"}}</div>
+
+<div class="{{predictionCtrl.columnClass}}">
+	<div class="prediction__select">
+		<select-list ng-model="predictionCtrl.winnerModel"
+					 ng-change="predictionCtrl.onChange('winnerModel')"
+					 options="predictionCtrl.winnersOptions"></select-list>
+	</div>
+</div>
+<div class="{{predictionCtrl.columnClass}}">
+	<div class="prediction__select">
+		<select-list ng-model="predictionCtrl.teamOneGoalsModel"
+					 ng-change="predictionCtrl.onChange()"
+					 options="predictionCtrl.teamOneGoalsOptions"></select-list>
+	</div>
+</div>
+<div class="{{predictionCtrl.columnClass}}">
+	<div class="prediction__select">
+		<select-list ng-model="predictionCtrl.teamTwoGoalsModel"
+					 ng-change="predictionCtrl.onChange()"
+					 options="predictionCtrl.teamTwoGoalsOptions"></select-list>
+	</div>
+</div>
+<div class="{{predictionCtrl.columnClass}}">
+	<div class="prediction__select">
+		<select-list ng-model="predictionCtrl.goalDifferenceModel"
+					 ng-change="predictionCtrl.onChange()"
+					 options="predictionCtrl.goalDifferenceOptions"></select-list>
+	</div>
+</div>
+<div class="{{predictionCtrl.columnClass}}">
+	<div class="prediction__select">
+		<select-list ng-model="predictionCtrl.firstToScoreModel"
+					 ng-change="predictionCtrl.onChange()"
+					 options="predictionCtrl.firstToScoreOptions"></select-list>
+	</div>
+</div>
+
+<div class="{{predictionCtrl.columnClass}} prediction__applyBtn"
+	 ng-class="{'prediction__modelChanged': predictionCtrl.modelChanged}"
+	 ng-click="predictionCtrl.onApply()">apply</div>
+

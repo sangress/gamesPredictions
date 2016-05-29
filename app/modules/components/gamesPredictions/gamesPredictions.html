@@ -13,47 +13,10 @@
 			<span class="gamesPredictions__column gamesPredictions__action"></span>
 		</div>
 
-		<div class="gamesPredictions__row"
-			 ng-repeat="game in ::gamesPredictionsCtrl.games track by game.id">
-
-			<div class="gamesPredictions__column">{{game.teamOne}}</div>
-
-			<div class="gamesPredictions__column">{{game.teamTwo}}</div>
-
-			<div class="gamesPredictions__column">{{game.time}}</div>
-
-			<div class="gamesPredictions__column">
-				<div class="gamesPredictions__select">
-					<select-list ng-model="game.winnersModel"
-								 options="game.winnersOptions"></select-list>
-				</div>
-			</div>
-			<div class="gamesPredictions__column">
-				<div class="gamesPredictions__select">
-					<select-list ng-model="game.teamOneGoalsModel"
-								 options="gamesPredictionsCtrl.teamOneGoalsOptions"></select-list>
-				</div>
-			</div>
-			<div class="gamesPredictions__column">
-				<div class="gamesPredictions__select">
-					<select-list ng-model="game.teamTwoGoalsModel"
-								 options="gamesPredictionsCtrl.teamTwoGoalsOptions"></select-list>
-				</div>
-			</div>
-			<div class="gamesPredictions__column">
-				<div class="gamesPredictions__select">
-					<select-list ng-model="game.goalDifferenceModel"
-								 options="gamesPredictionsCtrl.goalDifferenceOptions"></select-list>
-				</div>
-			</div>
-			<div class="gamesPredictions__column">
-				<div class="gamesPredictions__select">
-					<select-list ng-model="game.firstToScoreModel"
-								 options="game.firstToScoreOptions"></select-list>
-				</div>
-			</div>
-
-			<div class="gamesPredictions__column gamesPredictions__action">V</div>
-		</div>
+		<prediction ng-repeat="game in ::gamesPredictionsCtrl.games track by game.id"
+					ng-model="game"
+					ng-change="gamesPredictionsCtrl.onApplyChanges(game)"
+					class="gamesPredictions__row"
+					column-class="gamesPredictions__column"></prediction>
 	</div>
 </div>
