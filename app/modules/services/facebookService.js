@@ -25,6 +25,7 @@ appModule.config(["facebookProvider", function (facebookProvider) {
 	facebookProvider.setConfig({
 		appId      : '280069379007045',
 		xfbml      : true,
+		cookie	   : true,
 		version    : 'v2.6'
 	});
 }]);
@@ -62,7 +63,7 @@ appModule.factory('FacebookService', [ 'facebook',
 			facebookPromise.then(FB => FB.api(userId + '/picture', cb));
 
 		const getAuthResponse = (cb) =>
-			facebookPromise.then(FB => FB.getLoginStatus(
+			facebookPromise.then(FB => FB.getAuthResponse(
 				(response) => console.log(response)
 			));
 
