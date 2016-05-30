@@ -10,10 +10,12 @@
 			 ng-model="homepageCtrl.selectedPage"
 			 ng-click="homepageCtrl.tabClicked(tab.id)"></tab>
 
-		<div ng-click="homepageCtrl.logout()">logout<img ng-src="{{homepageCtrl.pictureUrl}}" class="homepage__profilePic"/></div>
+		<!--<i class="fa fa-cog" aria-hidden="true"></i>-->
+		<div ng-click="homepageCtrl.logout()">logout</div>
+		<img ng-src="{{homepageCtrl.pictureUrl}}" class="homepage__profilePic"/>
 	</div>
 
-	<div ng-switch="homepageCtrl.selectedPage">
+	<div class="homepage__tabsContent" ng-switch="homepageCtrl.selectedPage">
 		<my-page ng-switch-when="myPage"></my-page>
 		<games-predictions ng-switch-when="gamesPredictions"
 						   user-id="{{homepageCtrl.user.id}}"

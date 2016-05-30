@@ -40,7 +40,8 @@
 	</div>
 </div>
 
-<div class="{{predictionCtrl.columnClass}} prediction__applyBtn"
-	 ng-class="{'prediction__modelChanged': predictionCtrl.modelChanged}"
-	 ng-click="predictionCtrl.onApply()">apply</div>
+<i class="fa fa-floppy-o {{predictionCtrl.columnClass}} prediction__applyBtn"
+   aria-hidden="true"
+   ng-class="{'prediction__modelChanged': predictionCtrl.modelChanged}"
+   ng-click="predictionCtrl.onApply()"></i>
 

@@ -9,7 +9,7 @@
 			<span class="games__column">Team 2 Goals</span>
 			<span class="games__column">Goal Difference</span>
 			<span class="games__column">First To Score</span>
-			<span class="games__column games__action"></span>
+			<span class="games__column games__action">Apply</span>
 		</div>
 
 		<div class="games__row"
@@ -52,7 +52,9 @@
 				</div>
 			</div>
 
-			<div class="games__column games__action">V</div>
+			<i class="fa fa-floppy-o games__column games__action"
+			   aria-hidden="true"
+			   ng-click="gamesCtrl.onApply()"></i>
 		</div>
 	</div>
 </div>
