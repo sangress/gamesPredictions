@@ -47,10 +47,24 @@ function LoginController(FacebookService, loginStatus, $state, loginService, Fir
 	};
 }
 
-getFacebookStatus.$inject = ['FacebookService', '$q'];
-function getFacebookStatus (FacebookService, $q) {
+getFacebookStatus.$inject = ['FacebookService', '$q', '$timeout', '$state'];
+function getFacebookStatus (FacebookService, $q, $timeout, $state) {
 	const deferred = $q.defer();
-	FacebookService.getLoginStatus( (response) => deferred.resolve(response.status));
+
+	FacebookService.getLoginStatus( (response) => {
+		if (response.authResponse) {
+			$timeout(() => $state.go('homepage', {}, {
+				location: 'replace',
+				reload: true
+			}));
+
+			return deferred.reject();
+		}
+
+		return deferred.resolve();
+	});
+
+
 	return deferred.promise;
 }
 

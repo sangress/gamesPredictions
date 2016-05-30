@@ -4,10 +4,10 @@ require('./homepage.less');
 
 const appModule = angular.module('homepage', []);
 
-HomepageController.$inject = ['user', 'FacebookService', '$scope'];
-function HomepageController(user, FacebookService, $scope) {
+HomepageController.$inject = ['userDetails', 'FacebookService', '$scope'];
+function HomepageController(userDetails, FacebookService, $scope) {
 
-	this.user = user;
+	this.user = userDetails;
 	this.selectedPage = "gamesPredictions";
 	this.tabClicked = (id) => this.selectedPage = id;
 
@@ -21,28 +21,36 @@ function HomepageController(user, FacebookService, $scope) {
 		{id: 'usersPredicts', name: 'Users Predicts'}
 	];
 
-	//this.pictureUrl = "cd";
-	//FacebookService.getPicture(this.user.id,
-	//	(response) => {
-	//		$scope.$apply(()=> this.pictureUrl = response.data.url);
-	//	});
+	FacebookService.getPicture(this.user.id,
+		(response) => {
+			$scope.$apply(()=> this.pictureUrl = response.data.url);
+		});
 }
 
-getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout', 'FirebaseService'];
-function getLoginStatus (loginService, $state, $q, $timeout, FirebaseService) {
+getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout', 'FirebaseService', 'FacebookService'];
+function getLoginStatus (loginService, $state, $q, $timeout, FirebaseService, FacebookService) {
 
-	return FirebaseService.getUser('10153471103786104');
+	const deferred = $q.defer();
 
-	//if (loginService.isLoggedIn()) {
-	//	return loginService.getUser();
-	//}
-    //
-	//$timeout(() => $state.go('login', {}, {
-	//	location: 'replace',
-	//	reload: true
-	//}));
-    //
-	//return $q.reject();
+	FacebookService.getLoginStatus(response => {
+		if (response.authResponse) {
+			return deferred.resolve(response.authResponse.userID);
+		}
+
+		$timeout(() => $state.go('login', {}, {
+			location: 'replace',
+			reload: true
+		}));
+
+		return deferred.reject();
+	});
+
+	return deferred.promise;
+}
+
+getUserDetails.$inject = ['fbUserId', 'FirebaseService'];
+function getUserDetails (fbUserId, FirebaseService) {
+	return FirebaseService.getUser(fbUserId);
 }
 
 appModule.config(['$stateProvider', '$urlRouterProvider',
@@ -54,10 +62,11 @@ appModule.config(['$stateProvider', '$urlRouterProvider',
 				controller: HomepageController,
 				controllerAs: 'homepageCtrl',
 				resolve: {
-					user: getLoginStatus
+					fbUserId: getLoginStatus,
+					userDetails: getUserDetails
 				}
 			});
-		//$urlRouterProvider.otherwise('/');
+
 	}]);
 
 module.exports = appModule.name;
