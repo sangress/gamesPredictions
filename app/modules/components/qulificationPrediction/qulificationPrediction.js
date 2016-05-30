@@ -35,18 +35,22 @@ function QulificationPredictionController(FirebaseService, $scope) {
 		.then(groups =>	{
 			const groupsNames = _.keys(groups);
 			const g = groupsNames.reduce((arr, name) => {
-				arr.push({name: name, countries: groups[name], model: this.model[name]});
+				arr.push({name: name, countries: groups[name]});
 				return arr;
 			}, []);
 
 			$scope.$apply(() => this.groups = g);
 		});
 
-
+	this.onSelected = (id, model) => {
+		FirebaseService.updateUserQulification(this.userId, id, model,
+			() => $scope.$broadcast(id + '-update-completed'));
+	};
 }
 
 appModule.component('qulificationPrediction', {
 	bindings: {
+		userId: "@",
 		model: "=userQulificationPrediction"
 	},
 	controllerAs: 'qulificationPredictionCtrl',

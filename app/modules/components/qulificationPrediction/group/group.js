@@ -5,8 +5,8 @@ require('./group.less');
 
 const appModule = angular.module('group', []);
 
-GroupController.$inject = ['$scope'];
-function GroupController($scope) {
+GroupController.$inject = ['$scope', '$timeout'];
+function GroupController($scope, $timeout) {
 	$scope.$watch('groupCtrl.countries', () => {
 
 		if (angular.isUndefined(this.countries)) {
@@ -27,18 +27,37 @@ function GroupController($scope) {
 	this.$onInit = () =>
 		this.ngModel.$render = render;
 
-	this.onChange = () => {
+	let watch = null;
+	this.onSelected = () => {
 		const group = angular.copy(this.group);
 		group.firstPlace = this.firstPlaceModel;
 		group.firstPlaceScore = this.firstPlaceScoreModel;
 		group.secondPlace = this.secondPlaceModel;
 		group.secondPlaceScore = this.secondPlaceScoreModel;
 		this.ngModel.$setViewValue(group);
+
+		watch = $scope.$on(this.id + '-update-completed', () => {
+			$scope.$apply( () => {
+				this.showSave = true;
+
+				$timeout( () => this.showSave = false, 1000);
+				watch();
+				watch = null;
+			});
+		});
 	};
+
+	$scope.$on('$destroy', () => {
+		if (watch !== null) {
+			watch();
+			watch = null;
+		}
+	});
 }
 
 appModule.component('group', {
 	bindings: {
+		id: "@",
 		countries: "=",
 		totalScore: "=",
 		groupName: "@",

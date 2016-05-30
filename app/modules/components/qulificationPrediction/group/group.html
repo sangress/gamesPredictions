@@ -1,12 +1,15 @@
 <div class="group">
 
 	<div class="group__groupName" ng-if="groupCtrl.groupName">{{groupCtrl.groupName}}</div>
+	<i class="fa fa-check-circle-o group__groupSaved"
+	   ng-class="{'group__groupSaved--visible': groupCtrl.showSave}"aria-hidden="true"></i>
 
 	<div class="group__row">
 		<div class="group__selectWinner">
 			<div class="group__selectionTitle">{{groupCtrl.firstPlaceTitle || '1st place'}}</div>
 			<div class="group__selectOptions">
 				<select-list ng-model="groupCtrl.firstPlaceModel"
+							 ng-change="groupCtrl.onSelected()"
 							 options="groupCtrl.countriesOptions"></select-list>
 			</div>
 		</div>
@@ -14,6 +17,7 @@
 			<div class="group__selectionTitle">Total Score</div>
 			<div class="group__selectOptions">
 				<select-list ng-model="groupCtrl.firstPlaceScoreModel"
+							 ng-change="groupCtrl.onSelected()"
 							 options="groupCtrl.totalScore"></select-list>
 			</div>
 		</div>
@@ -24,6 +28,7 @@
 			<div class="group__selectionTitle">{{groupCtrl.secondPlaceTitle || '2nd place'}}</div>
 			<div class="group__selectOptions">
 				<select-list ng-model="groupCtrl.secondPlaceModel"
+							 ng-change="groupCtrl.onSelected()"
 							 options="groupCtrl.countriesOptions"></select-list>
 			</div>
 		</div>
@@ -31,6 +36,7 @@
 			<div class="group__selectionTitle">Total Score</div>
 			<div class="group__selectOptions">
 				<select-list ng-model="groupCtrl.secondPlaceScoreModel"
+							 ng-change="groupCtrl.onSelected()"
 							 options="groupCtrl.totalScore"></select-list>
 			</div>
 		</div>

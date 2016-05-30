@@ -26,13 +26,14 @@ function HomepageController(userDetails, FacebookService, $scope, $state) {
 			$scope.$apply(()=> this.pictureUrl = response.data.url);
 		});
 
-	//this.logout = () => {
-	//	FacebookService.logout();
-	//	$state.go('login', {}, {
-	//		location: 'replace',
-	//		reload: true
-	//	});
-	//};
+	this.logout = () => {
+		FacebookService.logout( () => {
+			$state.go('login', {}, {
+				location: 'replace',
+				reload: true
+			});
+		});
+	};
 }
 
 getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout', 'FirebaseService', 'FacebookService'];

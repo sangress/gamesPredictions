@@ -25,7 +25,7 @@ function PredictionController($scope) {
 	this.teamTwoGoalsOptions = teamGoalsOptions;
 	this.goalDifferenceOptions = teamGoalsOptions;
 
-
+	let watch = null;
 	this.onApply = () => {
 		const game = angular.copy(this.game);
 		game.winner = this.winnerModel || null;
@@ -35,13 +35,21 @@ function PredictionController($scope) {
 		game.firstToScore = this.firstToScoreModel || null;
 		this.ngModel.$setViewValue(game);
 
-		const watch = $scope.$on(game.id + '-update-completed', () => {
+		watch = $scope.$on(game.id + '-update-completed', () => {
 			$scope.$apply( () => {
 				this.modelChanged = false;
 				watch();
+				watch = null;
 			});
 		});
 	};
+
+	$scope.$on('$destroy', () => {
+		if (watch !== null) {
+			watch();
+			watch = null;
+		}
+	});
 
 	const render = () => {
 		this.game = this.ngModel.$viewValue;

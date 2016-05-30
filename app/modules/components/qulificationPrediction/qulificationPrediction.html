@@ -5,15 +5,19 @@
 		<group countries="qulificationPredictionCtrl.countriesOptions"
 			   total-score="qulificationPredictionCtrl.championScoreOptions"
 			   ng-model="qulificationPredictionCtrl.model.champion"
+			   ng-change="qulificationPredictionCtrl.onSelected('champion', qulificationPredictionCtrl.model.champion)"
 			   class="qulificationPrediction__group"
+			   id="champion"
 			   first-place-title="Winner"
 			   second-place-title="Runner Up"></group>
 	</div>
 
 	<div class="qulificationPrediction__box qulificationPrediction__groups">
 		<group ng-repeat="group in qulificationPredictionCtrl.groups track by $index"
-			   ng-model="group.model.group"
+			   ng-model="qulificationPredictionCtrl.model[group.name]"
+			   ng-change="qulificationPredictionCtrl.onSelected(group.name, qulificationPredictionCtrl.model[group.name])"
 			   group-name="{{group.name}}"
+			   id="{{group.name}}"
 			   countries="group.countries"
 			   total-score="qulificationPredictionCtrl.scoreOptions"
 			   class="qulificationPrediction__group"></group>

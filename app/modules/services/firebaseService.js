@@ -52,6 +52,9 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 	const updateUserGame = (userId, gameId, game, onComplete) =>
 		userRef(userId).child(`/gamesPredictions/${gameId}`).set(game, onComplete);
 
+	const updateUserQulification = (userId, propId, data, onComplete) =>
+		userRef(userId).child(`/qulificationPrediction/${propId}`).set(data, onComplete);
+
 	// The public API interface
 	return {
 		addGame,
@@ -65,7 +68,8 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 		addUser,
 		isUserExist,
 		getUserGame,
-		updateUserGame
+		updateUserGame,
+		updateUserQulification
 	};
 }]);
 
