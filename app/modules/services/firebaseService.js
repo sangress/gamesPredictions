@@ -8,9 +8,6 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 	const fbDb = firebase.database();
 	const resultsFun = (resuls) => resuls.val();
 
-
-	// games
-
 	//const getGame = (gameId) => fbDb.ref('/games/' + gameId).once('value').then(resultsFun);
 
 	// Countries

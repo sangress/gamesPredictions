@@ -5,23 +5,23 @@
 			<span class="gamesResults__column">Team 2</span>
 			<span class="gamesResults__column">Time</span>
 			<span class="gamesResults__column">Winner</span>
-			<span class="gamesResults__column">Team 1 Goals</span>
-			<span class="gamesResults__column">Team 2 Goals</span>
-			<span class="gamesResults__column">Goal Difference</span>
+			<span class="gamesResults__column gamesResults__columnNumber">Team 1 Goals</span>
+			<span class="gamesResults__column gamesResults__columnNumber">Team 2 Goals</span>
+			<span class="gamesResults__column gamesResults__columnNumber">Goal Difference</span>
 			<span class="gamesResults__column">First To Score</span>
 			<span class="gamesResults__column">Total</span>
 		</div>
 
 		<div ng-repeat="game in gamesResultsCtrl.games track by game.id"
 			 class="gamesResults__row">
-			<div class="gamesResults__column">{{game.teamOne}}</div>
-			<div class="gamesResults__column">{{game.teamTwo}}</div>
-			<div class="gamesResults__column">{{game.time}}</div>
-			<div class="gamesResults__column">{{game.winner}}</div>
-			<div class="gamesResults__column">{{game.teamOneGoals}}</div>
-			<div class="gamesResults__column">{{game.teamTwoGoals}}</div>
-			<div class="gamesResults__column">{{game.goalsDifference}}</div>
-			<div class="gamesResults__column">{{game.firstToScore}}</div>
+			<div class="gamesResults__column">{{game.teamOne || 'N/A'}}</div>
+			<div class="gamesResults__column">{{game.teamTwo || 'N/A'}}</div>
+			<div class="gamesResults__column">{{game.time | date:"d.M.y H:mm"}}</div>
+			<div class="gamesResults__column">{{game.winner || 'N/A'}}</div>
+			<div class="gamesResults__column gamesResults__columnNumber">{{game.teamOneGoals}}</div>
+			<div class="gamesResults__column gamesResults__columnNumber">{{game.teamTwoGoals}}</div>
+			<div class="gamesResults__column gamesResults__columnNumber">{{game.goalDifference}}</div>
+			<div class="gamesResults__column">{{game.firstToScore || 'N/A'}}</div>
 			<div class="gamesResults__column">{{game.total}}</div>
 		</div>
 	</div>
