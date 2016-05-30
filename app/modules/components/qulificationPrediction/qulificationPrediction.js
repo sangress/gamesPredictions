@@ -23,21 +23,31 @@ function QulificationPredictionController(FirebaseService, $scope) {
 		{id: 9, value: '9'}
 	];
 
+	let i = 0;
+	this.championScoreOptions = [];
+	for (i; i< 100; i++) {
+		this.championScoreOptions.push({id: i, value: i});
+	}
+
+	FirebaseService.getCountries().then(countries => this.countriesOptions = countries);
+
 	FirebaseService.getGroups()
 		.then(groups =>	{
 			const groupsNames = _.keys(groups);
 			const g = groupsNames.reduce((arr, name) => {
-				arr.push({name: name, countries: groups[name]});
+				arr.push({name: name, countries: groups[name], model: this.model[name]});
 				return arr;
 			}, []);
 
 			$scope.$apply(() => this.groups = g);
 		});
+
+
 }
 
 appModule.component('qulificationPrediction', {
 	bindings: {
-
+		model: "=userQulificationPrediction"
 	},
 	controllerAs: 'qulificationPredictionCtrl',
 	controller: QulificationPredictionController,

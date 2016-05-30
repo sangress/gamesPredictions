@@ -4,11 +4,11 @@ require('./homepage.less');
 
 const appModule = angular.module('homepage', []);
 
-HomepageController.$inject = ['userDetails', 'FacebookService', '$scope'];
-function HomepageController(userDetails, FacebookService, $scope) {
+HomepageController.$inject = ['userDetails', 'FacebookService', '$scope', '$state'];
+function HomepageController(userDetails, FacebookService, $scope, $state) {
 
 	this.user = userDetails;
-	this.selectedPage = "gamesPredictions";
+	this.selectedPage = "qulificationPrediction";
 	this.tabClicked = (id) => this.selectedPage = id;
 
 	this.userPredictionsClicked = (id) => this.tabClicked('usersPredicts');
@@ -25,11 +25,18 @@ function HomepageController(userDetails, FacebookService, $scope) {
 		(response) => {
 			$scope.$apply(()=> this.pictureUrl = response.data.url);
 		});
+
+	//this.logout = () => {
+	//	FacebookService.logout();
+	//	$state.go('login', {}, {
+	//		location: 'replace',
+	//		reload: true
+	//	});
+	//};
 }
 
 getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout', 'FirebaseService', 'FacebookService'];
 function getLoginStatus (loginService, $state, $q, $timeout, FirebaseService, FacebookService) {
-
 	const deferred = $q.defer();
 
 	FacebookService.getLoginStatus(response => {
