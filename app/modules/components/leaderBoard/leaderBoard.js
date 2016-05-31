@@ -10,11 +10,10 @@ function LeaderBoardController(FirebaseService, $scope) {
 
 	FirebaseService.getUsers().then(results => {
 		const users = _.sortBy(results, user => user.currRank);
-
-		console.log(users);
-
 		$scope.$apply(()=> this.users = users);
 	});
+
+
 }
 
 appModule.component('leaderBoard', {

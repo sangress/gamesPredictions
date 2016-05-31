@@ -18,11 +18,12 @@ function UsersPredictsController(FirebaseService, $scope, usersPredictsService) 
 	this.onSelectedUser = () => FirebaseService.getUser(this.userSelected)
 		.then(user =>$scope.$apply(()=> this.userDetails = usersPredictsService.getUserDetails(user)));
 
+	this.userSelected && this.onSelectedUser();
 }
 
 appModule.component('usersPredicts', {
 	bindings: {
-
+		userSelected: "@defaultUserId"
 	},
 	controllerAs: 'usersPredictsCtrl',
 	controller: UsersPredictsController,

@@ -11,7 +11,10 @@ function HomepageController(userDetails, FacebookService, $scope, $state) {
 	this.selectedPage = "leaderBoard";
 	this.tabClicked = (id) => this.selectedPage = id;
 
-	this.userPredictionsClicked = (id) => this.tabClicked('usersPredicts');
+	this.userPredictionsClicked = (id) => {
+		this.defaultUserId = id;
+		this.tabClicked('usersPredicts');
+	};
 
 	this.tabs = [
 		{id: 'myPage', name: 'My Page'},
