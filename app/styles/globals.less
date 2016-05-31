@@ -1,81 +1,79 @@
 .visibilityHidden {
-	visibility: hidden;
+  visibility: hidden;
 }
 
 .displayNone {
-	display: none !important;
+  display: none !important;
 }
 
 .wordBreak {
-	word-break: break-all;
+  word-break: break-all;
 }
 
 .firstCapitalize {
-	display: inline-block;
-	text-transform: lowercase;
+  display: inline-block;
+  text-transform: lowercase;
 
-	&::first-letter {
-		text-transform: capitalize;
-	}
+  &::first-letter {
+	text-transform: capitalize;
+  }
 }
 
 .ellipsis {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .text--uppercase {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .pull--right {
-	float: right !important;
+  float: right !important;
 }
 .pull--left {
-	float: left !important;
+  float: left !important;
 }
 
 .clearfix {
-	&:before,
-	&:after {
-		content: " ";
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+  &:before,
+  &:after {
+	content: " ";
+	display: table;
+  }
+  &:after {
+	clear: both;
+  }
 }
 
 .view {
-	display: table-cell;
+  display: table-cell;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  vertical-align: middle;
+
+
+  &__body {
+	display: inline-block;
 	box-sizing: border-box;
-	width: 100vw;
-	height: 100vh;
-	text-align: center;
+	padding: 30px;
 	vertical-align: middle;
-
-
-	&__body {
-		display: inline-block;
-		box-sizing: border-box;
-		padding: 30px;
-		vertical-align: middle;
-		width: 93%;
-	  	min-width: 900px;
-		height: 90%;
-	  	min-height: 600px;
-		background-color: #ffffff;
-		border-radius: 12px;
-		margin: 0 auto;
-		opacity: 0.9;
-	}
+	width: 1200px;
+	height: 750px;
+	background-color: #ffffff;
+	border-radius: 12px;
+	margin: 0 auto;
+	opacity: 0.9;
+  }
 }
 
 .center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 //grey: #d2d2d2;

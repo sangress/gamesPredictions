@@ -17,10 +17,10 @@ function HomepageController(userDetails, FacebookService, $scope, $state, $timeo
 	};
 
 	this.tabs = [
-		{id: 'myPage', name: 'My Page'},
+		//{id: 'myPage', name: 'My Page'},
+		{id: 'leaderBoard', name: 'Leader Board'},
 		{id: 'qulificationPrediction', name: 'Qulification Prediction'},
 		{id: 'gamesPredictions', name: 'Games Predictions'},
-		{id: 'leaderBoard', name: 'Leader Board'},
 		{id: 'usersPredicts', name: 'Users Predicts'}
 	];
 

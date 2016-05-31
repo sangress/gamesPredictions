@@ -45,8 +45,12 @@
 	</div>
 </div>
 
-<i class="fa fa-floppy-o {{predictionCtrl.columnClass}} prediction__applyBtn"
+<i class="fa {{predictionCtrl.columnClass}} prediction__applyBtn"
    aria-hidden="true"
-   ng-class="{'prediction__modelChanged': predictionCtrl.modelChanged, 'prediction__disabled': predictionCtrl.disableGame}"
+   ng-show="predictionCtrl.game.teamOne || predictionCtrl.game.teamTwo"
+   ng-class="{
+   	'prediction__modelChanged fa-floppy-o': predictionCtrl.modelChanged,
+   	'fa-check': !predictionCtrl.modelChanged,
+    'prediction__disabled': predictionCtrl.disableGame}"
    ng-click="predictionCtrl.onApply()"></i>
 

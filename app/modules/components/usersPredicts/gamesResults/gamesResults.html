@@ -18,9 +18,9 @@
 			<div class="gamesResults__column">{{game.teamTwo || 'N/A'}}</div>
 			<div class="gamesResults__column">{{game.time | date:"d.M.y H:mm"}}</div>
 			<div class="gamesResults__column">{{game.winner || 'N/A'}}</div>
-			<div class="gamesResults__column gamesResults__columnNumber">{{game.teamOneGoals}}</div>
-			<div class="gamesResults__column gamesResults__columnNumber">{{game.teamTwoGoals}}</div>
-			<div class="gamesResults__column gamesResults__columnNumber">{{game.goalDifference}}</div>
+			<div class="gamesResults__column gamesResults__columnNumber">{{game.teamOneGoals || 'N/A'}}</div>
+			<div class="gamesResults__column gamesResults__columnNumber">{{game.teamTwoGoals || 'N/A'}}</div>
+			<div class="gamesResults__column gamesResults__columnNumber">{{game.goalDifference || 'N/A'}}</div>
 			<div class="gamesResults__column">{{game.firstToScore || 'N/A'}}</div>
 			<div class="gamesResults__column">{{game.totalScore}}</div>
 		</div>
