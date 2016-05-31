@@ -70,6 +70,10 @@ function PredictionController($scope) {
 		this.teamTwoGoalsModel = this.game.teamTwoGoals;
 		this.goalDifferenceModel = this.game.goalDifference;
 		this.firstToScoreModel = this.game.firstToScore;
+
+		const now = new Date().getTime();
+		const lastHourToUpdate = new Date(new Date( this.game.time).getTime()-(60 * 60 * 1000)).getTime();
+		this.disableGame = angular.isUndefined(this.game.teamOne) || angular.isUndefined(this.game.teamTwo) || (now > lastHourToUpdate);
 	};
 
 	this.$onInit = () =>

@@ -8,7 +8,7 @@ HomepageController.$inject = ['userDetails', 'FacebookService', '$scope', '$stat
 function HomepageController(userDetails, FacebookService, $scope, $state, $timeout) {
 
 	this.user = userDetails;
-	this.selectedPage = "qulificationPrediction";
+	this.selectedPage = "gamesPredictions";
 	this.tabClicked = (id) => this.selectedPage = id;
 
 	this.userPredictionsClicked = (id) => {
