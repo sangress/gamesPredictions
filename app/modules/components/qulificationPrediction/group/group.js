@@ -62,7 +62,8 @@ appModule.component('group', {
 		totalScore: "=",
 		groupName: "@",
 		firstPlaceTitle: "@",
-		secondPlaceTitle: "@"
+		secondPlaceTitle: "@",
+		disabled: "="
 	},
 	require: {ngModel: 'ngModel'},
 	controllerAs: 'groupCtrl',

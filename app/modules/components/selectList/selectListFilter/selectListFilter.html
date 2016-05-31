@@ -1,6 +1,6 @@
 <ui-select class="selectList"
 		   ng-model="selectListCtrl.model"
-		   ng-disabled="selectListCtrl.options.length < 1"
+		   ng-disabled="selectListCtrl.disabled || selectListCtrl.options.length < 1"
 		   theme="selectListFilter"
 		   append-to-body="true"
 		   search-enabled="false"

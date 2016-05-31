@@ -31,7 +31,8 @@ function SelectListController() {
 swModule.component('selectList', {
 	template: require('./selectListFilter/selectListFilter.html'),
 	bindings: {
-		options: "="
+		options: "=",
+		disabled: "="
 	},
 	require: {ngModel: 'ngModel'},
 	controllerAs: 'selectListCtrl',

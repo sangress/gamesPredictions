@@ -8,6 +8,7 @@
 			   ng-change="qulificationPredictionCtrl.onSelected('champion', qulificationPredictionCtrl.model.champion)"
 			   class="qulificationPrediction__group"
 			   id="champion"
+			   disabled="qulificationPredictionCtrl.disableValues"
 			   first-place-title="Winner"
 			   second-place-title="Runner Up"></group>
 	</div>
@@ -18,6 +19,7 @@
 			   ng-change="qulificationPredictionCtrl.onSelected(group.name, qulificationPredictionCtrl.model[group.name])"
 			   group-name="{{group.name}}"
 			   id="{{group.name}}"
+			   disabled="qulificationPredictionCtrl.disableValues"
 			   countries="group.countries"
 			   total-score="qulificationPredictionCtrl.scoreOptions"
 			   class="qulificationPrediction__group"></group>
