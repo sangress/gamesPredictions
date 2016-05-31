@@ -4,11 +4,11 @@ require('./homepage.less');
 
 const appModule = angular.module('homepage', []);
 
-HomepageController.$inject = ['userDetails', 'FacebookService', '$scope', '$state'];
-function HomepageController(userDetails, FacebookService, $scope, $state) {
+HomepageController.$inject = ['userDetails', 'FacebookService', '$scope', '$state', '$timeout'];
+function HomepageController(userDetails, FacebookService, $scope, $state, $timeout) {
 
 	this.user = userDetails;
-	this.selectedPage = "leaderBoard";
+	this.selectedPage = "myPage";
 	this.tabClicked = (id) => this.selectedPage = id;
 
 	this.userPredictionsClicked = (id) => {
@@ -30,17 +30,17 @@ function HomepageController(userDetails, FacebookService, $scope, $state) {
 		});
 
 	this.logout = () => {
-		FacebookService.logout( () => {
-			$state.go('login', {}, {
+		FacebookService.logout( (response) => {
+			$timeout(() => $state.go('login', {}, {
 				location: 'replace',
 				reload: true
-			});
+			}));
 		});
 	};
 }
 
-getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout', 'FirebaseService', 'FacebookService'];
-function getLoginStatus (loginService, $state, $q, $timeout, FirebaseService, FacebookService) {
+getLoginStatus.$inject = ['$state', '$q', '$timeout', 'FacebookService'];
+function getLoginStatus ($state, $q, $timeout, FacebookService) {
 	const deferred = $q.defer();
 
 	FacebookService.getLoginStatus(response => {
@@ -61,6 +61,11 @@ function getLoginStatus (loginService, $state, $q, $timeout, FirebaseService, Fa
 
 getUserDetails.$inject = ['fbUserId', 'FirebaseService'];
 function getUserDetails (fbUserId, FirebaseService) {
+	return FirebaseService.getUser(fbUserId);
+}
+
+addNewUser.$inject = ['fbUserId', 'FirebaseService'];
+function addNewUser (fbUserId, FirebaseService) {
 	return FirebaseService.getUser(fbUserId);
 }
 
