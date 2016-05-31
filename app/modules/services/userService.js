@@ -9,8 +9,8 @@ appModule.factory('userService', ['FirebaseService', (FirebaseService) => {
 			id: id,
 			name: name,
 			email: email,
-			prevRank: -1,
-			currRank: -1,
+			prevRank: 0,
+			currRank: 0,
 			totleScore: 0,
 			qulificationPrediction: {
 				champion: {
