@@ -15,13 +15,8 @@
 			</div>
 		</div>
 		<div class="group__selectScore">
-			<div class="group__selectionTitle">Total Score</div>
-			<div class="group__selectOptions">
-				<select-list ng-model="groupCtrl.firstPlaceScoreModel"
-							 ng-change="groupCtrl.onSelected()"
-							 disabled="groupCtrl.disabled"
-							 options="groupCtrl.totalScore"></select-list>
-			</div>
+			<div class="group__selectionTitle">Your Score</div>
+			<div class="group__selectionTitle group__score">{{groupCtrl.firstPlaceScoreModel}}</div>
 		</div>
 	</div>
 
@@ -36,13 +31,8 @@
 			</div>
 		</div>
 		<div class="group__selectScore">
-			<div class="group__selectionTitle">Total Score</div>
-			<div class="group__selectOptions">
-				<select-list ng-model="groupCtrl.secondPlaceScoreModel"
-							 ng-change="groupCtrl.onSelected()"
-							 disabled="groupCtrl.disabled"
-							 options="groupCtrl.totalScore"></select-list>
-			</div>
+			<div class="group__selectionTitle">Your Score</div>
+			<div class="group__selectionTitle group__score">{{groupCtrl.secondPlaceScoreModel}}</div>
 		</div>
 	</div>
 </div>
