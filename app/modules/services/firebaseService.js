@@ -20,6 +20,8 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 
 	// Games
 	const getGames = () => fbDb.ref('/games/').once('value').then(resultsFun);
+	const getGame = (id) => fbDb.ref('/games/' + id).once('value').then(resultsFun);
+	const updateGame = (game, onComplete) => fbDb.ref('/games/' + game.id).set(game, onComplete);
 	const addGame = (id, time, team1 = null, team2 = null) => {
 		const game = {
 			id: id,
@@ -44,6 +46,8 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 
 	// user-games
 	const userRef = (userId) => fbDb.ref(`/users/${userId}`);
+	const updateUser = (userDetails, onComplete) =>
+			userRef(userDetails.id).set(userDetails, onComplete);
 	const getUserGame = (userId, gameId) =>
 		userRef(userId).child(`/gamesPredictions/${gameId}`).once('value').then(resultsFun);
 	const updateUserGame = (userId, gameId, game, onComplete) =>
@@ -55,13 +59,16 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 	// The public API interface
 	return {
 		addGame,
+		getGame,
 		getGames,
+		updateGame,
 		setCountries,
 		getCountries,
 		getGroups,
 		setGroups,
 		getUsers,
 		getUser,
+		updateUser,
 		addUser,
 		isUserExist,
 		getUserGame,
@@ -94,61 +101,5 @@ appModule.config(["firebaseProvider", function (firebaseProvider) {
 
 	firebaseProvider.setConfig(config);
 }]);
-
-//appModule.run( ['$window', function( $window ) {
-//
-//	(function(d, s, id){
-//		var js, fjs = d.getElementsByTagName(s)[0];
-//		if (d.getElementById(id)) {return;}
-//		js = d.createElement(s); js.id = id;
-//		js.src = "https://www.gstatic.com/firebasejs/live/3.0/firebase.js";
-//		fjs.parentNode.insertBefore(js, fjs);
-//	}(document, 'script', 'firebase-jssdk'));
-//}]);
-//
-//appModule.factory('FacebookService', [ 'facebook',
-//	function FacebookServiceFactory(facebook) {
-//
-//		const facebookPromise = facebook.promise;
-//
-//		const getLoginStatus = (cb) =>
-//			facebookPromise.then(FB =>
-//				FB.getLoginStatus(cb));
-//
-//		const login = (permissions, cb) =>
-//			facebookPromise.then(FB => FB.login(cb, permissions));
-//
-//		const logout = (cb) =>
-//			facebookPromise.then(FB => FB.logout(cb));
-//
-//		const friends = (cb) =>
-//			facebookPromise.then(FB =>
-//				FB.api('/me/friendlists', cb));
-//
-//		const sendMessage = (message, to, cb) =>
-//			facebookPromise.then(FB => FB.ui({
-//				app_id: 'YOUR FB APP ID',
-//				method: 'send',
-//				name: "NAME",
-//				link: 'LONK TO YOUR WEBSITE',
-//				to: to,
-//				description: message
-//
-//			}, cb));
-//
-//		const me = (cb) =>
-//			facebookPromise.then(FB => FB.api('/me', cb));
-//
-//		// The public API interface
-//		return {
-//			login,
-//			logout,
-//			getLoginStatus,
-//			me,
-//			friends,
-//			sendMessage
-//		};
-//
-//	}]);
 
 module.exports = appModule.name;

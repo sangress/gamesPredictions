@@ -106,6 +106,11 @@ function GamesController(FirebaseService, $scope) {
 				teamOne: game.teamOne,
 				teamTwo: game.teamTwo,
 				time: game.time,
+				winnerModel: game.winner,
+				teamOneGoalsModel: game.teamOneGoals,
+				teamTwoGoalsModel: game.teamTwoGoals,
+				goalDifferenceModel: game.goalDifference,
+				firstToScoreModel: game.firstToScore,
 				winnersOptions: [
 					{id: 'draw', value: 'draw'},
 					{id: game.teamOne, value: game.teamOne},
@@ -119,12 +124,87 @@ function GamesController(FirebaseService, $scope) {
 			};
 		});
 
+
+		this.gamesIndex = g.reduce((obj, game) => {
+			obj[game.id] = false;
+			return obj;
+		}, {});
+
 		$scope.$apply(() => this.games = g);
 	});
 
 
+	this.onApply = (currGame) => {
 
+		if (angular.isUndefined(currGame.winnerModel) ||
+			angular.isUndefined(currGame.teamOneGoalsModel) ||
+				angular.isUndefined(currGame.teamTwoGoalsModel) ||
+					angular.isUndefined(currGame.goalDifferenceModel) ||
+						angular.isUndefined(currGame.firstToScoreModel)) {
 
+			alert("You mut fill all the game results!");
+			return;
+		}
+
+		const saveGameResults = (game, cb) => FirebaseService.updateGame(game, cb);
+		const getGame = (id) => FirebaseService.getGame(id);
+		const getUsers = () => FirebaseService.getUsers();
+		const updateUser = (user) => FirebaseService.updateUser(user);
+
+		const updateUsersScores = (game, cb) => {
+
+			getUsers().then(users => {
+
+				_.values(users).forEach(user => {
+					let score = 0;
+					const userGame = user.gamesPredictions[game.id];
+
+					if (userGame.winner === game.winner) {
+						score += 2;
+					}
+
+					if (userGame.teamOneGoals === game.teamOneGoals) {
+						score += 2;
+					}
+
+					if (userGame.teamTwoGoals === game.teamTwoGoals) {
+						score += 2;
+					}
+
+					if (userGame.goalDifference === game.goalDifference) {
+						score += 2;
+					}
+
+					if (userGame.firstToScore === game.firstToScore) {
+						score += 2;
+					}
+
+					user.prevRank = user.currRank;
+					user.currRank = user.currRank + score;
+					userGame.totalScore = score;
+
+					updateUser(user);
+				});
+
+				cb();
+			});
+		};
+
+		getGame(currGame.id).then(gameDb => {
+			gameDb.winner = currGame.winnerModel;
+			gameDb.teamOneGoals = currGame.teamOneGoalsModel;
+			gameDb.teamTwoGoals = currGame.teamTwoGoalsModel;
+			gameDb.goalDifference = currGame.goalDifferenceModel;
+			gameDb.firstToScore = currGame.firstToScoreModel;
+
+			saveGameResults(gameDb, () => {
+
+				updateUsersScores(gameDb, () => this.gamesIndex[gameDb.id] = false);
+			});
+		});
+	};
+
+	this.onChange = (index) => this.gamesIndex[index] = true;
 }
 
 appModule.component('games', {

@@ -23,38 +23,46 @@
 
 			<div class="games__column">
 				<div class="games__select">
-					<select-list ng-model="game.winnersModel"
+					<select-list ng-model="game.winnerModel"
+								 ng-change="gamesCtrl.onChange($index)"
 								 options="game.winnersOptions"></select-list>
 				</div>
 			</div>
 			<div class="games__column">
 				<div class="games__select">
 					<select-list ng-model="game.teamOneGoalsModel"
+								 ng-change="gamesCtrl.onChange($index)"
 								 options="gamesCtrl.teamOneGoalsOptions"></select-list>
 				</div>
 			</div>
 			<div class="games__column">
 				<div class="games__select">
 					<select-list ng-model="game.teamTwoGoalsModel"
+								 ng-change="gamesCtrl.onChange($index)"
 								 options="gamesCtrl.teamTwoGoalsOptions"></select-list>
 				</div>
 			</div>
 			<div class="games__column">
 				<div class="games__select">
 					<select-list ng-model="game.goalDifferenceModel"
+								 ng-change="gamesCtrl.onChange($index)"
 								 options="gamesCtrl.goalDifferenceOptions"></select-list>
 				</div>
 			</div>
 			<div class="games__column">
 				<div class="games__select">
 					<select-list ng-model="game.firstToScoreModel"
+								 ng-change="gamesCtrl.onChange($index)"
 								 options="game.firstToScoreOptions"></select-list>
 				</div>
 			</div>
 
-			<i class="fa fa-floppy-o games__column games__action"
+			<i class="fa games__applyBtn"
 			   aria-hidden="true"
-			   ng-click="gamesCtrl.onApply()"></i>
+			   ng-class="{
+					'games__modelChanged fa-floppy-o': gamesCtrl.gamesIndex[$index],
+					'fa-check': !gamesCtrl.gamesIndex[$index]}"
+			   ng-click="gamesCtrl.onApply(game)"></i>
 		</div>
 	</div>
 </div>
