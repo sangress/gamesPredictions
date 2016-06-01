@@ -8,18 +8,15 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 	const fbDb = firebase.database();
 	const resultsFun = (resuls) => resuls.val();
 
-
-	// games
-
 	//const getGame = (gameId) => fbDb.ref('/games/' + gameId).once('value').then(resultsFun);
 
 	// Countries
 	const getCountries = () => fbDb.ref('/countries/').once('value').then(resultsFun);
-	const setCountries = (countries) => fbDb.ref('/countries').set(countries);
+	const setCountries = (countries, onComplete) => fbDb.ref('/countries').set(countries, onComplete);
 
 	// Groups
 	const getGroups = () => fbDb.ref('/groups/').once('value').then(resultsFun);
-	const setGroups = (groups) => fbDb.ref('/groups').set(groups);
+	const setGroups = (groups, onComplete) => fbDb.ref('/groups').set(groups, onComplete);
 
 	// Games
 	const getGames = () => fbDb.ref('/games/').once('value').then(resultsFun);
@@ -43,7 +40,17 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 	const getUsers = () => fbDb.ref('/users/').once('value').then(resultsFun);
 	const getUser = (id) => fbDb.ref('/users/' + id).once('value').then(resultsFun);
 	const isUserExist = (id) => fbDb.ref('/users/' + id).once('value').then((resuls) => resuls.val() !== null);
-	const addUser = (user) => fbDb.ref('users/' + user.id).set(user);
+	const addUser = (user, onComplete) => fbDb.ref('users/' + user.id).set(user, onComplete);
+
+	// user-games
+	const userRef = (userId) => fbDb.ref(`/users/${userId}`);
+	const getUserGame = (userId, gameId) =>
+		userRef(userId).child(`/gamesPredictions/${gameId}`).once('value').then(resultsFun);
+	const updateUserGame = (userId, gameId, game, onComplete) =>
+		userRef(userId).child(`/gamesPredictions/${gameId}`).set(game, onComplete);
+
+	const updateUserQulification = (userId, propId, data, onComplete) =>
+		userRef(userId).child(`/qulificationPrediction/${propId}`).set(data, onComplete);
 
 	// The public API interface
 	return {
@@ -56,7 +63,10 @@ appModule.factory('FirebaseService', ['firebase', (firebase) => {
 		getUsers,
 		getUser,
 		addUser,
-		isUserExist
+		isUserExist,
+		getUserGame,
+		updateUserGame,
+		updateUserQulification
 	};
 }]);
 

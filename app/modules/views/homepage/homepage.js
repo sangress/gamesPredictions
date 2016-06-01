@@ -4,44 +4,69 @@ require('./homepage.less');
 
 const appModule = angular.module('homepage', []);
 
-HomepageController.$inject = ['user', 'FacebookService', '$scope'];
-function HomepageController(user, FacebookService, $scope) {
+HomepageController.$inject = ['userDetails', 'FacebookService', '$scope', '$state', '$timeout'];
+function HomepageController(userDetails, FacebookService, $scope, $state, $timeout) {
 
-	this.user = user;
-	this.selectedPage = "myPage";
+	this.user = userDetails;
+	this.selectedPage = "leaderBoard";
 	this.tabClicked = (id) => this.selectedPage = id;
 
-	this.userPredictionsClicked = (id) => this.tabClicked('usersPredicts');
+	this.userPredictionsClicked = (id) => {
+		this.defaultUserId = id;
+		this.tabClicked('usersPredicts');
+	};
 
 	this.tabs = [
-		{id: 'myPage', name: 'My Page'},
+		//{id: 'myPage', name: 'My Page'},
+		{id: 'leaderBoard', name: 'Leader Board'},
 		{id: 'qulificationPrediction', name: 'Qulification Prediction'},
 		{id: 'gamesPredictions', name: 'Games Predictions'},
-		{id: 'leaderBoard', name: 'Leader Board'},
 		{id: 'usersPredicts', name: 'Users Predicts'}
 	];
-
-	this.pictureUrl = "cd";
 
 	FacebookService.getPicture(this.user.id,
 		(response) => {
 			$scope.$apply(()=> this.pictureUrl = response.data.url);
 		});
+
+	this.logout = () => {
+		FacebookService.logout( (response) => {
+			$timeout(() => $state.go('login', {}, {
+				location: 'replace',
+				reload: true
+			}));
+		});
+	};
 }
 
-getLoginStatus.$inject = ['loginService', '$state', '$q', '$timeout'];
-function getLoginStatus (loginService, $state, $q, $timeout) {
+getLoginStatus.$inject = ['$state', '$q', '$timeout', 'FacebookService'];
+function getLoginStatus ($state, $q, $timeout, FacebookService) {
+	const deferred = $q.defer();
 
-	if (loginService.isLoggedIn()) {
-		return $q.resolve(loginService.getUser());
-	}
+	FacebookService.getLoginStatus(response => {
+		if (response.authResponse) {
+			return deferred.resolve(response.authResponse.userID);
+		}
 
-	$timeout(() => $state.go('login', {}, {
-		location: 'replace',
-		reload: true
-	}));
+		$timeout(() => $state.go('login', {}, {
+			location: 'replace',
+			reload: true
+		}));
 
-	return $q.reject();
+		return deferred.reject();
+	});
+
+	return deferred.promise;
+}
+
+getUserDetails.$inject = ['fbUserId', 'FirebaseService'];
+function getUserDetails (fbUserId, FirebaseService) {
+	return FirebaseService.getUser(fbUserId);
+}
+
+addNewUser.$inject = ['fbUserId', 'FirebaseService'];
+function addNewUser (fbUserId, FirebaseService) {
+	return FirebaseService.getUser(fbUserId);
 }
 
 appModule.config(['$stateProvider', '$urlRouterProvider',
@@ -53,10 +78,11 @@ appModule.config(['$stateProvider', '$urlRouterProvider',
 				controller: HomepageController,
 				controllerAs: 'homepageCtrl',
 				resolve: {
-					user: getLoginStatus
+					fbUserId: getLoginStatus,
+					userDetails: getUserDetails
 				}
 			});
-		//$urlRouterProvider.otherwise('/');
+
 	}]);
 
 module.exports = appModule.name;

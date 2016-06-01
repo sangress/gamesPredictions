@@ -2,56 +2,24 @@
 
 	<div class="qulificationPrediction__box qulificationPrediction__champions">
 
-		<div class="qulificationPrediction__champion">
-			<div class="qulificationPrediction__selection">
-				<div class="qulificationPrediction__selectionTitle">Champion</div>
-				<div class="qulificationPrediction__selectionValue qulificationPrediction__selectOptions">
-					<select-list ng-model="qulificationPredictionCtrl.championModel"
-								 options="qulificationPredictionCtrl.countriesOptions"></select-list>
-				</div>
-			</div>
-
-			<div class="qulificationPrediction__selection">
-				<div class="qulificationPrediction__selectionTitle">Time</div>
-				<div class="qulificationPrediction__selectionValue"></div>
-			</div>
-
-			<div class="qulificationPrediction__selection">
-				<div class="qulificationPrediction__selectionTitle">Total Score</div>
-				<div class="qulificationPrediction__selectionValue qulificationPrediction__selectOptions">
-					<select-list ng-model="qulificationPredictionCtrl.totalScoreOneModel"
-								 options="qulificationPredictionCtrl.scoreOptions"></select-list>
-				</div>
-			</div>
-		</div>
-
-		<div class="qulificationPrediction__runnerUp">
-			<div class="qulificationPrediction__selection">
-				<div class="qulificationPrediction__selectionTitle">Runner up</div>
-				<div class="qulificationPrediction__selectionValue qulificationPrediction__selectOptions">
-					<select-list ng-model="qulificationPredictionCtrl.runnerUpModel"
-								 options="qulificationPredictionCtrl.countriesOptions"></select-list>
-				</div>
-			</div>
-
-			<div class="qulificationPrediction__selection">
-				<div class="qulificationPrediction__selectionTitle">Time</div>
-				<div class="qulificationPrediction__selectionValue"></div>
-			</div>
-
-			<div class="qulificationPrediction__selection">
-				<div class="qulificationPrediction__selectionTitle">Total Score</div>
-				<div class="qulificationPrediction__selectionValue qulificationPrediction__selectOptions">
-					<select-list ng-model="qulificationPredictionCtrl.totalScoreTwoModel"
-								 options="qulificationPredictionCtrl.scoreOptions"></select-list>
-				</div>
-			</div>
-		</div>
+		<group countries="qulificationPredictionCtrl.countriesOptions"
+			   total-score="qulificationPredictionCtrl.championScoreOptions"
+			   ng-model="qulificationPredictionCtrl.model.champion"
+			   ng-change="qulificationPredictionCtrl.onSelected('champion', qulificationPredictionCtrl.model.champion)"
+			   class="qulificationPrediction__group"
+			   id="champion"
+			   disabled="qulificationPredictionCtrl.disableValues"
+			   first-place-title="Winner"
+			   second-place-title="Runner Up"></group>
 	</div>
 
 	<div class="qulificationPrediction__box qulificationPrediction__groups">
 		<group ng-repeat="group in qulificationPredictionCtrl.groups track by $index"
+			   ng-model="qulificationPredictionCtrl.model[group.name]"
+			   ng-change="qulificationPredictionCtrl.onSelected(group.name, qulificationPredictionCtrl.model[group.name])"
 			   group-name="{{group.name}}"
+			   id="{{group.name}}"
+			   disabled="qulificationPredictionCtrl.disableValues"
 			   countries="group.countries"
 			   total-score="qulificationPredictionCtrl.scoreOptions"
 			   class="qulificationPrediction__group"></group>

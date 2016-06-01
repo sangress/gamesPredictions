@@ -8,15 +8,15 @@
 			<span class="leaderBoard__column"></span>
 		</div>
 
-		<div ng-repeat="player in ::leaderBoardCtrl.users track by player.id"
+		<div ng-repeat="user in ::leaderBoardCtrl.users track by user.id"
 			 class="leaderBoard__row">
-			<span class="leaderBoard__column">{{player.currRank}}</span>
-			<span class="leaderBoard__column">{{player.prevRank}}</span>
+			<span class="leaderBoard__column">{{user.currRank}}</span>
+			<span class="leaderBoard__column">{{user.prevRank}}</span>
 			<span class="leaderBoard__column">
-				<div>{{player.name}}</div>
+				<div>{{user.name}}</div>
 			</span>
 			<span class="leaderBoard__column leaderBoard__link"
-					ng-click="leaderBoardCtrl.userPredictionsClicked({id: player.id})">See Predictions</span>
+					ng-click="leaderBoardCtrl.userPredictionsClicked({id: user.id})">See Predictions</span>
 		</div>
 	</div>
 

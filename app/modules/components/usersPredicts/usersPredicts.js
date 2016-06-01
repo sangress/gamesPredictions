@@ -7,47 +7,29 @@ const appModule = angular.module('usersPredicts', [
 	require('./gamesResults/gamesResults')
 ]);
 
-UsersPredictsController.$inject = [];
-function UsersPredictsController() {
+UsersPredictsController.$inject = ['FirebaseService', '$scope', 'usersPredictsService'];
+function UsersPredictsController(FirebaseService, $scope, usersPredictsService) {
 
-	//this.users = UsersService.getUsers().map(user => ({id: user.id, value: user.name}));
+	FirebaseService.getUsers().then(results => {
+		const users = _.values(results).map(user => ({id: user.id, value: user.name}));
+		$scope.$apply(()=> this.users = users);
+	});
 
-	this.champion = "England";
-	this.runnerUp = "England";
+	this.onSelectedUser = () => FirebaseService.getUser(this.userSelected)
+		.then(user =>$scope.$apply(()=> this.userDetails = usersPredictsService.getUserDetails(user)));
 
-	this.groups = [
-		[
-			{title: 'Group 1 winner:', value: "England"},
-			{title: 'Group 1 runner up:', value: "England"}
-		],
-		[
-			{title: 'Group 2 winner:', value: "England"},
-			{title: 'Group 2 runner up:', value: "England"}
-		],
-		[
-			{title: 'Group 3 winner:', value: "England"},
-			{title: 'Group 3 runner up:', value: "England"}
-		],
-		[
-			{title: 'Group 4 winner:', value: "England"},
-			{title: 'Group 4 runner up:', value: "England"}
-		]
-	];
-
-	this.onSelectedUser = () => {
-		const user = _.find(this.users,(user) => user.id === this.userSelected);
-		this.userName = user.value;
-	};
-
+	this.userSelected && this.onSelectedUser();
 }
 
 appModule.component('usersPredicts', {
 	bindings: {
-
+		userSelected: "@defaultUserId"
 	},
 	controllerAs: 'usersPredictsCtrl',
 	controller: UsersPredictsController,
 	template: require('./usersPredicts.html')
 });
+
+appModule.factory('usersPredictsService', require('./usersPredictsService'));
 
 module.exports = appModule.name;

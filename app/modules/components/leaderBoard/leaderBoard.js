@@ -5,10 +5,14 @@ const _ = require('lodash');
 
 const appModule = angular.module('leaderBoard', []);
 
-LeaderBoardController.$inject = [];
-function LeaderBoardController(UsersService) {
+LeaderBoardController.$inject = ['FirebaseService', '$scope'];
+function LeaderBoardController(FirebaseService, $scope) {
 
-	//this.users = _.sortBy(UsersService.getUsers(), (user) => user.currRank);
+	FirebaseService.getUsers().then(results => {
+		const users = _.sortBy(results, user => user.currRank);
+		$scope.$apply(()=> this.users = users);
+	});
+
 
 }
 

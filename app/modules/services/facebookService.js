@@ -20,10 +20,12 @@ appModule.provider('facebook', function () {
 		return facebook;
 	}];
 });
-
+// production: 280069379007045
+// dev: 282236672123649
 appModule.config(["facebookProvider", function (facebookProvider) {
 	facebookProvider.setConfig({
-		appId      : '280069379007045',
+		appId      : '282236672123649',
+		cookie	   : true,
 		xfbml      : true,
 		version    : 'v2.6'
 	});

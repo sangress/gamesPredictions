@@ -1,38 +1,32 @@
 tab:not(:last-child) {
-	margin: 0 50px 0 0;
+  margin: 0 50px 0 0;
 }
 
 .tab {
 
-	display: inline-block;
-	position: relative;
+  display: inline-block;
+  position: relative;
 
-	&__input[type="radio"] {
-		height: 0;
-		width: 0;
-		margin: 0;
-		opacity: 0;
-		display: none;
-	}
+  &__input[type="radio"] {
+	height: 0;
+	width: 0;
+	margin: 0;
+	opacity: 0;
+	display: none;
+  }
 
-	&__label {
-		font-size: 18px;
-		font-weight: 500;
-		text-align: center;
-		cursor: pointer;
-		white-space: nowrap;
-	}
+  &__label {
+	font-size: 18px;
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+	line-height: 50px;
+  }
 
-	&__input:not(:checked) + &__label {
-		height: 63px;
-		line-height: 62px;
-	}
-
-	&__input:checked + &__label {
-		height: 71px;
-		line-height: 68px;
-		color: #c80000;
-	}
+  &__input:checked + &__label {
+	color: #c80000;
+  }
 }
 
 

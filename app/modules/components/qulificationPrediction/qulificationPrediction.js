@@ -23,6 +23,14 @@ function QulificationPredictionController(FirebaseService, $scope) {
 		{id: 9, value: '9'}
 	];
 
+	let i = 0;
+	this.championScoreOptions = [];
+	for (i; i< 100; i++) {
+		this.championScoreOptions.push({id: i, value: i});
+	}
+
+	FirebaseService.getCountries().then(countries => this.countriesOptions = countries);
+
 	FirebaseService.getGroups()
 		.then(groups =>	{
 			const groupsNames = _.keys(groups);
@@ -33,11 +41,25 @@ function QulificationPredictionController(FirebaseService, $scope) {
 
 			$scope.$apply(() => this.groups = g);
 		});
+
+	this.onSelected = (id, model) => {
+		FirebaseService.updateUserQulification(this.userId, id, model,
+			() => $scope.$broadcast(id + '-update-completed'));
+	};
+
+	const today = new Date().getTime();
+	const lastDay = 1465585200000; // 'Fri Jun 10 2016 22:00:00 GMT+0300 (Jerusalem Daylight Time)'
+
+	this.disableValues = false;
+	if (today > lastDay) {
+		this.disableValues = true;
+	}
 }
 
 appModule.component('qulificationPrediction', {
 	bindings: {
-
+		userId: "@",
+		model: "=userQulificationPrediction"
 	},
 	controllerAs: 'qulificationPredictionCtrl',
 	controller: QulificationPredictionController,

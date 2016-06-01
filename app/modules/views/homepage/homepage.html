@@ -10,17 +10,22 @@
 			 ng-model="homepageCtrl.selectedPage"
 			 ng-click="homepageCtrl.tabClicked(tab.id)"></tab>
 
+		<!--<div ng-click="homepageCtrl.logout()">logout</div>-->
 		<img ng-src="{{homepageCtrl.pictureUrl}}" class="homepage__profilePic"/>
 	</div>
 
 	<div class="homepage__tabsContent" ng-switch="homepageCtrl.selectedPage">
 		<my-page ng-switch-when="myPage"></my-page>
 		<games-predictions ng-switch-when="gamesPredictions"
+						   user-id="{{homepageCtrl.user.id}}"
 						   user-games-predictions="homepageCtrl.user.gamesPredictions"></games-predictions>
-		<qulification-prediction ng-switch-when="qulificationPrediction"></qulification-prediction>
+		<qulification-prediction ng-switch-when="qulificationPrediction"
+								 user-id="{{homepageCtrl.user.id}}"
+								 user-qulification-prediction="homepageCtrl.user.qulificationPrediction"></qulification-prediction>
 		<leader-board ng-switch-when="leaderBoard"
 					  user-predictions-clicked="homepageCtrl.userPredictionsClicked(id)"></leader-board>
-		<users-predicts ng-switch-when="usersPredicts"></users-predicts>
+		<users-predicts ng-switch-when="usersPredicts"
+						default-user-id="{{homepageCtrl.defaultUserId}}"></users-predicts>
 	</div>
 
 </div>

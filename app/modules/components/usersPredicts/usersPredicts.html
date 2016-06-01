@@ -8,22 +8,22 @@
 						 options="usersPredictsCtrl.users"></select-list>
 		</div>
 	</div>
-	<div class="usersPredicts__details" ng-if="usersPredictsCtrl.userSelected">
+	<div class="usersPredicts__details" ng-if="usersPredictsCtrl.userDetails">
 		<div class="usersPredicts__championsDetails">
-			<div>{{usersPredictsCtrl.userName}}'s Qualification Predictions:</div>
+			<div>{{usersPredictsCtrl.userDetails.name}}'s Qualification Predictions:</div>
 			<div class="usersPredicts__championsDetails--row">
 				<div class="usersPredicts__details--title">Champion:</div>
-				<div class="usersPredicts__details--value">{{usersPredictsCtrl.champion}}</div>
+				<div class="usersPredicts__details--value">{{usersPredictsCtrl.userDetails.champion}}</div>
 			</div>
 
 			<div class="usersPredicts__championsDetails--row">
 				<div class="usersPredicts__details--title">Runner up:</div>
-				<div class="usersPredicts__details--value">{{usersPredictsCtrl.runnerUp}}</div>
+				<div class="usersPredicts__details--value">{{usersPredictsCtrl.userDetails.runnerUp}}</div>
 			</div>
 
 			<div class="usersPredicts__groupsContainer">
 				<div class="usersPredicts__groups"
-					 ng-repeat="group in usersPredictsCtrl.groups track by $index">
+					 ng-repeat="group in usersPredictsCtrl.userDetails.groups track by $index">
 					<div class="usersPredicts__groupDetails"
 						 ng-repeat="row in group track by $index">
 						<div class="usersPredicts__details--title">{{row.title}}</div>
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div class="usersPredicts__gamesDetails">
-			<games-results></games-results>
+			<games-results games="usersPredictsCtrl.userDetails.gamesPredictions"></games-results>
 		</div>
 	</div>
 </div>

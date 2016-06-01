@@ -1,0 +1,56 @@
+<div class="{{predictionCtrl.columnClass}}">{{predictionCtrl.game.teamOne || 'N/A'}}</div>
+
+<div class="{{predictionCtrl.columnClass}}">{{predictionCtrl.game.teamTwo || 'N/A'}}</div>
+
+<div class="{{predictionCtrl.columnClass}}">{{predictionCtrl.game.time | date:"d.M.y H:mm"}}</div>
+
+<div class="{{predictionCtrl.columnClass}}">
+	<div class="prediction__select">
+		<select-list ng-model="predictionCtrl.winnerModel"
+					 ng-change="predictionCtrl.onChange('winnerModel')"
+					 disabled="predictionCtrl.disableGame"
+					 options="predictionCtrl.winnersOptions"></select-list>
+	</div>
+</div>
+<div class="{{predictionCtrl.columnClass}}">
+	<div class="prediction__select">
+		<select-list ng-model="predictionCtrl.teamOneGoalsModel"
+					 ng-change="predictionCtrl.onChange()"
+					 disabled="predictionCtrl.disableGame"
+					 options="predictionCtrl.teamOneGoalsOptions"></select-list>
+	</div>
+</div>
+<div class="{{predictionCtrl.columnClass}}">
+	<div class="prediction__select">
+		<select-list ng-model="predictionCtrl.teamTwoGoalsModel"
+					 ng-change="predictionCtrl.onChange()"
+					 disabled="predictionCtrl.disableGame"
+					 options="predictionCtrl.teamTwoGoalsOptions"></select-list>
+	</div>
+</div>
+<div class="{{predictionCtrl.columnClass}}">
+	<div class="prediction__select">
+		<select-list ng-model="predictionCtrl.goalDifferenceModel"
+					 ng-change="predictionCtrl.onChange()"
+					 disabled="predictionCtrl.disableGame"
+					 options="predictionCtrl.goalDifferenceOptions"></select-list>
+	</div>
+</div>
+<div class="{{predictionCtrl.columnClass}}">
+	<div class="prediction__select">
+		<select-list ng-model="predictionCtrl.firstToScoreModel"
+					 ng-change="predictionCtrl.onChange()"
+					 disabled="predictionCtrl.disableGame"
+					 options="predictionCtrl.firstToScoreOptions"></select-list>
+	</div>
+</div>
+
+<i class="fa {{predictionCtrl.columnClass}} prediction__applyBtn"
+   aria-hidden="true"
+   ng-show="predictionCtrl.game.teamOne || predictionCtrl.game.teamTwo"
+   ng-class="{
+   	'prediction__modelChanged fa-floppy-o': predictionCtrl.modelChanged,
+   	'fa-check': !predictionCtrl.modelChanged,
+    'prediction__disabled': predictionCtrl.disableGame}"
+   ng-click="predictionCtrl.onApply()"></i>
+

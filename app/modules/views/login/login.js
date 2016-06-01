@@ -4,41 +4,20 @@ require('./login.less');
 
 const appModule = angular.module('login', []);
 
-LoginController.$inject = ['FacebookService', 'loginStatus', '$state', 'loginService', 'FirebaseService', 'userService'];
-function LoginController(FacebookService, loginStatus, $state, loginService, FirebaseService, userService) {
-
-
-	//userService.getNewUserDetails();
-
+LoginController.$inject = ['FacebookService', 'loginStatus', '$state', 'FirebaseService', 'userService'];
+function LoginController(FacebookService, loginStatus, $state, FirebaseService, userService) {
 
 	this.onLogin = () => {
 		FacebookService.login({scope: 'email, public_profile'},
 			(response) => {
 				if (response.authResponse) {
 					FacebookService.me((response) => {
-						FirebaseService.getUser(response.id).then(user => {
+						userService.getNewUserDetails(response.id, response.name, response.email)
+							.then(user => {
+								FirebaseService.addUser(user,
+									() => $state.go('homepage', {}, {location: 'replace', reload: true}));
 
-							if (user !== null) {
-								loginService.setUser(user);
-								$state.go('homepage', {}, {
-									location: 'replace',
-									reload: true
-								});
-
-								return;
-							}
-
-							userService.getNewUserDetails(response.id, response.name, response.email)
-								.then(user => {
-									FirebaseService.addUser(user);
-									loginService.setUser(user);
-									$state.go('homepage', {}, {
-										location: 'replace',
-										reload: true
-									});
-								});
-
-						});
+							});
 					});
 				} else {
 					console.log('User cancelled login or did not fully authorize.');
@@ -47,10 +26,29 @@ function LoginController(FacebookService, loginStatus, $state, loginService, Fir
 	};
 }
 
-getFacebookStatus.$inject = ['FacebookService', '$q'];
-function getFacebookStatus (FacebookService, $q) {
+getFacebookStatus.$inject = ['FacebookService', '$q', '$timeout', '$state', 'FirebaseService'];
+function getFacebookStatus (FacebookService, $q, $timeout, $state, FirebaseService) {
 	const deferred = $q.defer();
-	FacebookService.getLoginStatus( (response) => deferred.resolve(response.status));
+
+	FacebookService.getLoginStatus( (response) => {
+		if (response.authResponse) {
+			FirebaseService.isUserExist(response.id).then(isUserExist => {
+				if (!isUserExist) {
+					return deferred.resolve();
+				}
+
+				$timeout(() => $state.go('homepage', {}, {
+					location: 'replace',
+					reload: true
+				}));
+
+				return deferred.reject();
+			});
+		}
+		return deferred.resolve();
+	});
+
+
 	return deferred.promise;
 }
 
