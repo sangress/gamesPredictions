@@ -9,7 +9,7 @@ LeaderBoardController.$inject = ['FirebaseService', '$scope'];
 function LeaderBoardController(FirebaseService, $scope) {
 
 	FirebaseService.getUsers().then(results => {
-		const users = _.sortBy(results, user => user.currRank);
+		const users = _.sortBy(results, user => user.currRank * -1);
 		$scope.$apply(()=> this.users = users);
 	});
 
