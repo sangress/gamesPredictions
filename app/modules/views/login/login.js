@@ -32,7 +32,7 @@ function getFacebookStatus (FacebookService, $q, $timeout, $state, FirebaseServi
 
 	FacebookService.getLoginStatus( (response) => {
 		if (response.authResponse) {
-			FirebaseService.isUserExist(response.id).then(isUserExist => {
+			FirebaseService.isUserExist(response.authResponse.userID).then(isUserExist => {
 				if (!isUserExist) {
 					return deferred.resolve();
 				}
